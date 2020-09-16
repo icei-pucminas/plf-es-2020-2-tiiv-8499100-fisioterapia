@@ -25,5 +25,9 @@
     <ProjectReference Include="..\Fisioterapia.Models\Fisioterapia.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Exame\" />
+  </ItemGroup>
+
 
 </Project>

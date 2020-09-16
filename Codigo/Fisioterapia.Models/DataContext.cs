@@ -9,6 +9,7 @@ namespace Fisioterapia.Models {
             _configuration = configuration;
         }
         public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Atleta> Atleta { get; set; }
 
        // public DbSet<Logs> Logs { get; set; }
     }
