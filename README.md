@@ -1,18 +1,21 @@
-# Nome do projeto
+# Fisioterapia - Testes e Avaliação de Atletas
 
-Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
+O projeto é uma solução para a gestão dos testes e avaliações realizados por fisioterapeutas e seus auxiliare (alunos do curso de fisioterapia da PUC Minas), em atletas.
+
+Os auxiliares e fisioterapeutas terão acesso ao sistema para realizar o controle e atualização dos resultados obtidos pelos atletas em testes fisicos realizados, para o acompanhamento da condição física dos mesmos.
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Lucas de Lima Soares
+* Lucas Pereira de Carvalho
+* Pedro Henrique Magalhães Silva
+* Tallys Bruno Borges
+* Vinicius Alves Santos
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* Ivre Marjorie Ribeiro Machado
+* Soraia Lúcia da Silva
 
 ## Instruções de utilização
 
