@@ -1,4 +1,4 @@
-# projeto_fisio
+# FisioApp
 
 A new Flutter project.
 
