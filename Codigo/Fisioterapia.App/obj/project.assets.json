@@ -2251,27 +2251,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Fisioterapia.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "AutoMapper": "10.0.0",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.0.1",
-          "BCrypt.Net-Next": "4.0.0",
-          "MailKit": "2.8.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.7",
-          "Microsoft.EntityFrameworkCore": "3.1.7",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7",
-          "Microsoft.EntityFrameworkCore.Sqlite": "3.1.7",
-          "System.IdentityModel.Tokens.Jwt": "6.7.1"
-        },
-        "compile": {
-          "bin/placeholder/Fisioterapia.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Fisioterapia.Models.dll": {}
-        }
       }
     }
   },
@@ -7581,11 +7560,6 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
-    },
-    "Fisioterapia.Models/1.0.0": {
-      "type": "project",
-      "path": "../Fisioterapia.Models/Fisioterapia.Models.csproj",
-      "msbuildProject": "../Fisioterapia.Models/Fisioterapia.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7593,7 +7567,7 @@
       "AutoMapper >= 10.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 8.0.1",
       "BCrypt.Net-Next >= 4.0.0",
-      "Fisioterapia.Models >= 1.0.0",
+      "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.Models\\Fisioterapia.Models.csproj",
       "MailKit >= 2.8.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.7",
       "Microsoft.EntityFrameworkCore >= 3.1.7",
@@ -7611,11 +7585,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\Projeto Fisioterapia-1\\Fisioterapia.App\\Fisioterapia.App.csproj",
+      "projectUniqueName": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.App\\Fisioterapia.App.csproj",
       "projectName": "Fisioterapia.App",
-      "projectPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\Projeto Fisioterapia-1\\Fisioterapia.App\\Fisioterapia.App.csproj",
+      "projectPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.App\\Fisioterapia.App.csproj",
       "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\Projeto Fisioterapia-1\\Fisioterapia.App\\obj\\",
+      "outputPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.App\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7634,8 +7608,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\Projeto Fisioterapia-1\\Fisioterapia.Models\\Fisioterapia.Models.csproj": {
-              "projectPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\Projeto Fisioterapia-1\\Fisioterapia.Models\\Fisioterapia.Models.csproj"
+            "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.Models\\Fisioterapia.Models.csproj": {
+              "projectPath": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.Models\\Fisioterapia.Models.csproj"
             }
           }
         }
@@ -7717,5 +7691,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Não é possível encontrar o projeto 'C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.Models\\Fisioterapia.Models.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
+      "libraryId": "C:\\Users\\lukas\\OneDrive\\Área de Trabalho\\PUC MINAS\\4°-Periodo\\TIS - IV\\plf-es-2020-2-tiiv-8499100-fisioterapia\\Codigo\\Fisioterapia.Models\\Fisioterapia.Models.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
