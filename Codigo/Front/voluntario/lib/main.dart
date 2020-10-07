@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_fisio/screens/auth_screen.dart';
 import 'package:projeto_fisio/screens/auth_voluntary.dart';
+import 'package:projeto_fisio/screens/calc_Rq.dart';
+import 'package:projeto_fisio/screens/calc_Star.dart';
+import 'package:projeto_fisio/screens/calc_Y.dart';
 import 'package:projeto_fisio/screens/home_screen.dart';
 //import 'package:projeto_fisio/screens/auth_voluntary.dart';
 //import 'package:projeto_fisio/screens/formScreen.dart';
@@ -58,6 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 2:
         _layoutSelecionado = VoluntaryForm(_pegarIndice);
+        break;
+      case 3:
+        _layoutSelecionado = CalcRQ(_pegarIndice);
+        break;
+      case 4:
+        _layoutSelecionado = CalcY(_pegarIndice);
+        break;
+      case 5:
+        _layoutSelecionado = CalcStar(_pegarIndice);
         break;
       default:
     }

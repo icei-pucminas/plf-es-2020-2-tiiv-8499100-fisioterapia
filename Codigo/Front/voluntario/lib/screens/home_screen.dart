@@ -19,10 +19,11 @@ class HomeScreen extends StatelessWidget {
                     gradient: LinearGradient(
                         colors: <Color>[Colors.white, Colors.grey])),
                 child: Text('Menu Principal')),
-            CustomTile(Icons.account_circle, 'Perfil', () => {}),
             CustomTile(
-                Icons.add_circle, 'Cadastrar Atleta', () => mudarPagina(2)),
-            CustomTile(Icons.attach_file, 'Adicionar Arquivo', () => {}),
+                Icons.account_circle, 'Cadastrar Atleta', () => mudarPagina(2)),
+            CustomTile(Icons.add_circle, 'Ridigez de RQ', () => mudarPagina(3)),
+            CustomTile(Icons.add_circle, 'Y Test', () => mudarPagina(4)),
+            CustomTile(Icons.add_circle, 'Star Test', () => mudarPagina(5)),
             CustomTile(Icons.arrow_back, 'Sair', () => mudarPagina(0)),
           ],
         ),
