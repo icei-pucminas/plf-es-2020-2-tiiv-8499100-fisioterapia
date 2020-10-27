@@ -1,10 +1,9 @@
-import 'package:FisioApp/contaFisioterapeuta/model/exame.dart';
-import 'package:FisioApp/contaFisioterapeuta/view/widget/teste-view.dart';
+import 'package:FisioApp/providers/ficha.dart';
 import 'package:flutter/material.dart';
 
 class ExameView extends StatelessWidget {
-  final Exame exa;
-  ExameView(this.exa);
+  final Ficha elFicha;
+  ExameView(this.elFicha);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,8 +24,8 @@ class ExameView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        ' ID : ${exa.id.toString()}',
+                      /*   Text(
+                        ' ID : ${elFicha.id.toString()}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -36,40 +35,43 @@ class ExameView extends StatelessWidget {
                       SizedBox(
                         width: 40,
                       ),
+                      */
                       Container(
                         child: Row(
                           children: <Widget>[
-                            Text(exa.pendente ? 'Concluido' : 'Pendente'),
+                            Text(elFicha.pendente ? 'Concluido' : 'Pendente'),
                             SizedBox(
                               width: 10,
                             ),
                             Container(
-                              child: Icon(exa.pendente
+                              child: Icon(elFicha.pendente
                                   ? Icons.check
                                   : Icons.access_time),
                             ),
                           ],
                         ),
-                        //child: Text(exa.pendente ? "Concluído" : 'Pendente')
+                        //child: Text(elFicha.pendente ? "Concluído" : 'Pendente')
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    ' Nome do auxiliar: ${exa.nomeAuxiliar}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.teal[700],
+                  Container(
+                    child: Text(
+                      ' Nome do auxiliar: ${elFicha.nomeAuxiliar}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.teal[700],
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    ' Nome do atleta: ${exa.nomeAtleta}',
+                    ' Nome do atleta: ${elFicha.nomeAtleta}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -82,13 +84,13 @@ class ExameView extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Container(
+            /*Container(
               height: 100,
               width: 300,
               child: ListView.builder(
-                itemCount: exa.testes.length,
+                itemCount: elFicha.testes.length,
                 itemBuilder: (ctx, index) {
-                  final teste = exa.testes[index];
+                  final teste = elFicha.testes[index];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -97,7 +99,7 @@ class ExameView extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),

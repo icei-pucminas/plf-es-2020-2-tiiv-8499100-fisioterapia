@@ -1,9 +1,10 @@
-import 'package:FisioApp/contaFisioterapeuta/model/typeAuxiliares.dart';
+import 'package:FisioApp/providers/atleta.dart';
 import 'package:flutter/material.dart';
 
-class Auxiliares extends StatelessWidget {
-  final List<Auxiliar> lista;
-  Auxiliares(this.lista);
+class AtletaList extends StatelessWidget {
+  final List<Atleta> lista;
+  AtletaList(this.lista);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +28,7 @@ class Auxiliares extends StatelessWidget {
           : ListView.builder(
               itemCount: lista.length,
               itemBuilder: (ctx, index) {
-                final aux = lista[index];
+                final atl = lista[index];
                 return Card(
                   color: Colors.grey[100],
                   child: Row(
@@ -48,7 +49,7 @@ class Auxiliares extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            ' ID : ${aux.id.toString()}',
+                            ' ID : ${atl.idServer}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -56,7 +57,7 @@ class Auxiliares extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            ' Nome : ${aux.nome}',
+                            ' Nome : ${atl.nome}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -64,7 +65,7 @@ class Auxiliares extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            ' E-mail : ${aux.email}',
+                            ' CPF : ${atl.cpf}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

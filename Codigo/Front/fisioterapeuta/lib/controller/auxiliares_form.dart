@@ -1,20 +1,29 @@
+import 'package:FisioApp/providers/auxiliares.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuxiliaresForm extends StatefulWidget {
-  final void Function(String, String) submterFormulario;
-  AuxiliaresForm(this.submterFormulario);
+  AuxiliaresForm();
   @override
   _AuxiliaresFormState createState() => _AuxiliaresFormState();
 }
 
 class _AuxiliaresFormState extends State<AuxiliaresForm> {
+  var carregando = false;
   final nomeController = TextEditingController();
   final emailController = TextEditingController();
 
-  _submitForm() {
-    final nome = nomeController.text;
-    final email = emailController.text;
-    widget.submterFormulario(nome, email);
+  _submeter() {
+    final nomeInserido = nomeController.text;
+    final emailInserido = emailController.text;
+
+    Auxiliares conjAuxiliar = Provider.of<Auxiliares>(context, listen: false);
+    /*
+    conjAuxiliar.addAuxiliar(nomeInserido, emailInserido);
+    Navigator.of(context).pop();
+    */
+    conjAuxiliar.addAuxiliar(nomeInserido, emailInserido);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -27,14 +36,12 @@ class _AuxiliaresFormState extends State<AuxiliaresForm> {
           children: <Widget>[
             TextField(
               controller: nomeController,
-              onSubmitted: (_) => _submitForm(),
               decoration: InputDecoration(
                 labelText: 'Nome',
               ),
             ),
             TextField(
               controller: emailController,
-              onSubmitted: (_) => _submitForm(),
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
@@ -42,10 +49,9 @@ class _AuxiliaresFormState extends State<AuxiliaresForm> {
             Row(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Cadastrar Auxiliar'),
-                  textColor: Colors.teal,
-                  onPressed: _submitForm,
-                ),
+                    child: Text('Cadastrar Auxiliar'),
+                    textColor: Colors.teal,
+                    onPressed: () => _submeter()),
               ],
             ),
           ],

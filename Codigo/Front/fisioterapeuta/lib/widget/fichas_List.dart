@@ -1,10 +1,10 @@
-import 'package:FisioApp/contaFisioterapeuta/model/exame.dart';
-import 'package:FisioApp/contaFisioterapeuta/view/widget/exame-view.dart';
+import 'package:FisioApp/providers/ficha.dart';
+import 'package:FisioApp/widget/exame_View.dart';
 import 'package:flutter/material.dart';
 
-class Fichas extends StatelessWidget {
-  final List<Exame> lista;
-  Fichas(this.lista);
+class FichasList extends StatelessWidget {
+  final List<Ficha> lista;
+  FichasList(this.lista);
 
   @override
   Widget build(BuildContext context) {
