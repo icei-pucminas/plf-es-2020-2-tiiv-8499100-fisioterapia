@@ -1,0 +1,6 @@
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.csprojAssemblyReference.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.AssemblyInfoInputs.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.AssemblyInfo.cs
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.csproj.CoreCompileInputs.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.App\obj\Release\netcoreapp3.1\Fisioterapia.App.MvcApplicationPartsAssemblyInfo.cache

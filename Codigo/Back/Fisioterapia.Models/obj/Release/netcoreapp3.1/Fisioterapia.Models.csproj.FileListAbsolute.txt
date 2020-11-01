@@ -1,0 +1,12 @@
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\bin\Release\netcoreapp3.1\Fisioterapia.Models.deps.json
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\bin\Release\netcoreapp3.1\Fisioterapia.Models.runtimeconfig.json
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\bin\Release\netcoreapp3.1\Fisioterapia.Models.runtimeconfig.dev.json
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\bin\Release\netcoreapp3.1\Fisioterapia.Models.dll
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\bin\Release\netcoreapp3.1\Fisioterapia.Models.pdb
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.csprojAssemblyReference.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.AssemblyInfoInputs.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.AssemblyInfo.cs
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.csproj.CoreCompileInputs.cache
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.dll
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.pdb
+C:\Users\lukas\OneDrive\Área de Trabalho\PUC MINAS\4°-Periodo\TIS - IV\plf-es-2020-2-tiiv-8499100-fisioterapia\Codigo\Back\Fisioterapia.Models\obj\Release\netcoreapp3.1\Fisioterapia.Models.genruntimeconfig.cache
