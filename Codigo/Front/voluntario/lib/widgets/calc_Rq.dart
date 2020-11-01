@@ -1,8 +1,7 @@
+import 'package:FisioAux/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class CalcRQ extends StatefulWidget {
-  final void Function(int) mudarPagina;
-  CalcRQ(this.mudarPagina);
   @override
   _CalcRQState createState() => _CalcRQState();
 }
@@ -19,7 +18,7 @@ class _CalcRQState extends State<CalcRQ> {
           labelText: label,
           labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
           border: OutlineInputBorder()),
-      style: TextStyle(color: Colors.black, fontSize: 25.0),
+      style: TextStyle(color: Colors.black, fontSize: 16.0),
       keyboardType: TextInputType.number,
       controller: controll,
     );
@@ -84,40 +83,47 @@ class _CalcRQState extends State<CalcRQ> {
             ),
             buildTextfield("Membro Esquerdo:", membroEsquerdo),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.only(top: 0.5),
               child: Text(
                 infoText1,
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 textAlign: TextAlign.center,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Container(
-                height: 40.0,
-                child: RaisedButton(
-                  child: Text(
-                    "Verificar",
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    height: 40.0,
+                    child: RaisedButton(
+                      child: Text(
+                        "Verificar",
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                      onPressed: () {
+                        _calculate();
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    _calculate();
-                  },
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Container(
-                height: 40.0,
-                child: RaisedButton(
-                  child: Text(
-                    "  Voltar  ",
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                SizedBox(width: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    height: 40.0,
+                    child: RaisedButton(
+                      child: Text(
+                        "  Voltar  ",
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                      onPressed: () => Navigator.of(context)
+                          .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
+                    ),
                   ),
-                  onPressed: () => widget.mudarPagina(1),
                 ),
-              ),
+              ],
             ),
           ],
         ),

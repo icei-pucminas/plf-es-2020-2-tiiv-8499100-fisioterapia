@@ -69,7 +69,7 @@ class _FichasViewState extends State<FichasView> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    FichasList(listFicha.listaFichas),
+                    FichasList(),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

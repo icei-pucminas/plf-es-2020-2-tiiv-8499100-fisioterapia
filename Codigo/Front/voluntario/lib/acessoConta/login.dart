@@ -1,6 +1,7 @@
-import 'package:FisioApp/excecao/excecao_Acesso.dart';
-import 'package:FisioApp/providers/auth.dart';
-import 'package:FisioApp/utils/app_routes.dart';
+//import 'package:FisioApp/contaFisioterapeuta/controller/dashboard.dart';
+import 'package:FisioAux/excecao/excecao_Acesso.dart';
+import 'package:FisioAux/provider/auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,51 +15,13 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   GlobalKey<FormState> _form = GlobalKey();
   bool _isLoading = false;
+  var opcEscolhida;
   final _senhaController = TextEditingController();
   AuthMode _authMode = AuthMode.Login;
 
-/*@override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-         print('entrou no auth');
-         /*
-    String url = 'http://localhost:4000/Usuario/login';
-    Map<String, String> headers = {"Content-type": "application/json"};
-    String json = '{"Email":"hancokmatader941@gmail.com", "Senha": "123456"}';
-    // 'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAWhrytYUuvVK9_JhzYZlkxyZHRlu1spzg';
-     post(url, headers: headers, body: json);
-     
-      */
-       String url = 'http://192.168.15.8:4000/Usuario/login';
-       final json ={
-          "Email":"hancokmatader941@gmail.com", 
-          "Senha": "123456",
-       };
-       http.Response response = await http.post(url,body:json);
-      var jsonResponse = jsonDecode(response.body);
-      print(jsonResponse);
-        
-      // make POST request
-         
-      // check the status code for the result
-        //int statusCode = response.statusCode;
-  // this API passes back the id of the new item added to the body
-        //String body = response.body;
-  // {
-  //   "title": "Hello",
-  //   "body": "body text",
-  //   "userId": 1,
-  //   "id": 101
-  // }
-  }
-  */
-
   final Map<String, String> _authData = {
-    'nome': '',
     'email': '',
     'senha': '',
-    'confirmacao': '',
   };
 
   void _showErrorDialog(String msg) {
@@ -71,24 +34,6 @@ class _LoginState extends State<Login> {
           FlatButton(
             onPressed: () {
               Navigator.of(context).pop();
-            },
-            child: Text('Fechar'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showConfirmDialog(String msg) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('Cadastro realizado!'),
-        content: Text(msg),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).popAndPushNamed(AppRoutes.LOGIN);
             },
             child: Text('Fechar'),
           ),
@@ -112,18 +57,12 @@ class _LoginState extends State<Login> {
 
     try {
       if (_authMode == AuthMode.Login) {
-        await auth.login(
-          _authData["email"],
-          _authData["senha"],
-        );
+        await auth.login(_authData["email"], _authData["senha"]);
       } else {
         await auth.signup(
-          _authData["nome"],
           _authData["email"],
           _authData["senha"],
-          _authData["confirmacao"],
         );
-        _showConfirmDialog(auth.confirmacaoMensagem);
       }
     } on ExcecaoAcesso catch (error) {
       _showErrorDialog(error.toString());
@@ -155,19 +94,19 @@ class _LoginState extends State<Login> {
         color: Colors.white30,
         child: Container(
           margin: EdgeInsets.only(
-            top: 60,
-            left: 40,
-            right: 40,
+            top: 40,
+            left: 20,
+            right: 20,
           ),
-          child: ListView(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 20,
-                    vertical: 20,
+                    vertical: 10,
                   ),
-                  height: 560,
+                  height: 600,
                   child: Form(
                     key: _form,
                     child: Column(
@@ -187,28 +126,6 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 60,
                         ),
-                        if (_authMode == AuthMode.Signup)
-                          TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Nome",
-                              labelStyle: TextStyle(
-                                color: Colors.grey[300],
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                            ),
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Informe um nome';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) => _authData['nome'] = value,
-                          ),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -249,7 +166,7 @@ class _LoginState extends State<Login> {
                             fontSize: 20,
                           ),
                           validator: (value) {
-                            if (value.isEmpty || value.length < 6) {
+                            if (value.isEmpty || value.length < 8) {
                               return 'Informe uma senha válida';
                             }
                             return null;
@@ -272,8 +189,14 @@ class _LoginState extends State<Login> {
                             style: TextStyle(
                               fontSize: 20,
                             ),
-                            onSaved: (value) =>
-                                _authData['confirmacao'] = value,
+                            validator: _authMode == AuthMode.Signup
+                                ? (value) {
+                                    if (value != _senhaController.text) {
+                                      return 'Senhas diferentes';
+                                    }
+                                    return null;
+                                  }
+                                : null,
                           ),
                         Spacer(),
                         if (_isLoading)
@@ -313,8 +236,8 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

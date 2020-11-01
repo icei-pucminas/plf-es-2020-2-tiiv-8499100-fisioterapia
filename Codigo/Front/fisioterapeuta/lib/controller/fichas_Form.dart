@@ -60,6 +60,11 @@ class _FichasFormState extends State<FichasForm> {
             } else {
               //Logic to check if everything is completed
               print('Completed, check fields.');
+              print(' adicionando : ${auxiliares.selecionado.nome}');
+              print(
+                  'adicionando atleta : ${atletas.retornaAtletasSelecionados().last}');
+              print(
+                  'selecionandos testes : ${testes.retornarSelecionados().last}');
               fichas.addFichas(
                 auxiliares.selecionado,
                 atletas.retornaAtletasSelecionados(),

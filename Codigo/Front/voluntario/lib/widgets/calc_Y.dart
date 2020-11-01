@@ -1,8 +1,7 @@
+import 'package:FisioAux/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class CalcY extends StatefulWidget {
-  final void Function(int) mudarPagina;
-  CalcY(this.mudarPagina);
   @override
   _CalcYState createState() => _CalcYState();
 }
@@ -32,7 +31,7 @@ class _CalcYState extends State<CalcY> {
           labelText: label,
           labelStyle: TextStyle(color: Colors.black, fontSize: 20.0),
           border: OutlineInputBorder()),
-      style: TextStyle(color: Colors.black, fontSize: 2.0),
+      style: TextStyle(color: Colors.black, fontSize: 16.0),
       keyboardType: TextInputType.number,
       controller: controll,
     );
@@ -62,6 +61,7 @@ class _CalcYState extends State<CalcY> {
     int pLateralE = int.parse(posteroLateralE.text);
     int pMedial = int.parse(posteroMedial.text);
     int pMedialE = int.parse(posteroMedialE.text);
+
     int resultadoD = (anterior + pLateral + pMedial) * (3 * mDireito);
     int resultadoE = (anteriorE + pLateralE + pMedialE) * (3 * mEsquerdo);
 
@@ -76,7 +76,7 @@ class _CalcYState extends State<CalcY> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        title: Text("Y Excursion Balance Test"),
+        title: Text("Y Balance Test"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -199,40 +199,43 @@ class _CalcYState extends State<CalcY> {
             Divider(),
 
             //botão verificar
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Container(
-                height: 40.0,
-                child: RaisedButton(
-                  child: Text(
-                    "Verificar",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    height: 40.0,
+                    child: RaisedButton(
+                      child: Text(
+                        "Verificar",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                      onPressed: () {
+                        _calculate();
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    _calculate();
-                  },
                 ),
-              ),
-            ),
-            //botão de voltar
-            // Row(
-            // children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Container(
-                height: 40.0,
-                child: RaisedButton(
-                  child: Text(
-                    "Voltar",
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                //botão de voltar
+                SizedBox(width: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    height: 40.0,
+                    child: RaisedButton(
+                      child: Text(
+                        "Voltar",
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                      onPressed: () => Navigator.of(context)
+                          .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
+                    ),
                   ),
-                  onPressed: () => widget.mudarPagina(1),
                 ),
-              ),
+              ],
             ),
-            // ],
-            //),
           ],
         ),
       ),

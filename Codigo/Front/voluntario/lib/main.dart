@@ -1,37 +1,52 @@
+import 'package:FisioAux/acessoConta/login.dart';
+import 'package:FisioAux/provider/auth.dart';
+import 'package:FisioAux/provider/auxFichas.dart';
+import 'package:FisioAux/provider/model_voluntarys.dart';
+import 'package:FisioAux/utils/app_routes.dart';
+import 'package:FisioAux/view/auth_Ou_Fichas.dart';
+import 'package:FisioAux/view/auxiliarScreenPrincipal.dart';
+import 'package:FisioAux/view/result.dart';
+import 'package:FisioAux/widgets/calc_Rq.dart';
+import 'package:FisioAux/widgets/calc_Star.dart';
+import 'package:FisioAux/widgets/calc_Y.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_fisio/screens/auth_screen.dart';
-import 'package:projeto_fisio/screens/auth_voluntary.dart';
-import 'package:projeto_fisio/screens/calc_Rq.dart';
-import 'package:projeto_fisio/screens/calc_Star.dart';
-import 'package:projeto_fisio/screens/calc_Y.dart';
-import 'package:projeto_fisio/screens/home_screen.dart';
-//import 'package:projeto_fisio/screens/auth_voluntary.dart';
-//import 'package:projeto_fisio/screens/formScreen.dart';
+import 'package:provider/provider.dart';
+
+import 'controller/auth_voluntary.dart';
 
 void main() {
-  runApp(Main());
+  runApp(FisioApp());
 }
 
-class Main extends StatelessWidget {
+class FisioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fisioterapia',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        backgroundColor: Colors.black,
-        accentColor: Colors.black,
-        accentColorBrightness: Brightness.dark,
-        buttonTheme: ButtonTheme.of(context).copyWith(
-            buttonColor: Colors.cyan,
-            textTheme: ButtonTextTheme.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            )),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => new Auth(),
+        ),
+        ChangeNotifierProvider<ModelsVoluntarys>(
+          create: (_) => new ModelsVoluntarys(),
+        ),
+        ChangeNotifierProvider<FichasAux>(
+          create: (_) => new FichasAux(),
+        ),
+      ],
+      child: MaterialApp(
+        //home: MyHomePage(),
+        routes: {
+          AppRoutes.AUTHOUFICHAS: (ctx) => AuthOuFicha(),
+          AppRoutes.LOGIN: (ctx) => Login(),
+          AppRoutes.AUX_HOME_SCREEN: (ctx) => HomeScreen(),
+          AppRoutes.AUTH_VOLUNTARY: (ctx) => VoluntaryForm(),
+          AppRoutes.RESULT_AUTH_VOLUNTARY: (ctx) => Result(),
+          AppRoutes.CALC_RQ: (ctx) => CalcRQ(),
+          AppRoutes.CALC_Y: (ctx) => CalcY(),
+          AppRoutes.CALC_STAR: (ctx) => CalcStar(),
+        },
+        debugShowCheckedModeBanner: false,
       ),
-      home: MyHomePage(),
     );
   }
 }
@@ -42,44 +57,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _indiceLayout = 0;
-  var _layoutSelecionado;
-
-  void _pegarIndice(int indice) {
-    setState(() {
-      _indiceLayout = indice;
-    });
-  }
-
-  Widget _selecionarLayout() {
-    switch (_indiceLayout) {
-      case 0:
-        _layoutSelecionado = AuthScreen(_pegarIndice);
-        break;
-      case 1:
-        _layoutSelecionado = HomeScreen(_pegarIndice);
-        break;
-      case 2:
-        _layoutSelecionado = VoluntaryForm(_pegarIndice);
-        break;
-      case 3:
-        _layoutSelecionado = CalcRQ(_pegarIndice);
-        break;
-      case 4:
-        _layoutSelecionado = CalcY(_pegarIndice);
-        break;
-      case 5:
-        _layoutSelecionado = CalcStar(_pegarIndice);
-        break;
-      default:
-    }
-    return _layoutSelecionado;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _selecionarLayout(),
+      body: Container(child: Login()),
     );
   }
 }

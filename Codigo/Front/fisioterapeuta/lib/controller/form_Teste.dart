@@ -10,7 +10,7 @@ class FormTeste extends StatefulWidget {
 class _FormTesteState extends State<FormTeste> {
   @override
   Widget build(BuildContext context) {
-    Testes testes = Provider.of<Testes>(context);
+    Testes testes = Provider.of<Testes>(context,listen: false);
     return Container(
       height: 400,
       padding: EdgeInsets.only(

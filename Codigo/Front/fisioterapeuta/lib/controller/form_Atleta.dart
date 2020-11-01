@@ -12,7 +12,7 @@ class _FormAtletaState extends State<FormAtleta> {
   @override
   Widget build(BuildContext context) {
     //ListCheckBoxAtleta listAtlCkeck = Provider.of<ListCheckBoxAtleta>(context);
-    Atletas listAtleta = Provider.of<Atletas>(context);
+    Atletas listAtleta = Provider.of<Atletas>(context, listen: false);
     return Container(
       height: 400,
       padding: EdgeInsets.only(
@@ -38,6 +38,7 @@ class _FormAtletaState extends State<FormAtleta> {
                   onChanged: (bool value) {
                     setState(
                       () {
+                        print(atlCheckBox.nome);
                         atlCheckBox.selecionado = value;
                       },
                     );

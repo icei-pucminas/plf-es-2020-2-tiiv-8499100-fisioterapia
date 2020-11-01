@@ -17,7 +17,7 @@ class Fichas with ChangeNotifier {
   Future<void> loadFichas() async {
     List<Ficha> fichasCarregadas = [];
     final response = await http.get('$baseUrl/$_userId.json?auth=$_token');
-    //listaFichas.clear();
+    listaFichas.clear();
     Map<String, dynamic> data = json.decode(response.body);
     print(data);
 
@@ -41,6 +41,7 @@ class Fichas with ChangeNotifier {
       notifyListeners();
     }
     listaFichas = fichasCarregadas.reversed.toList();
+    notifyListeners();
     return Future.value();
   }
 
@@ -63,12 +64,16 @@ class Fichas with ChangeNotifier {
     );
     novaFicha.idServerFicha = json.decode(response.body)['name'];
     listaFichas.add(novaFicha);
+    print(listaFichas.last.nomeAuxiliar);
     notifyListeners();
+    return Future.value();
   }
 
 //montarFichas
   void addFichas(
       Auxiliar auxiliar, List<Atleta> atletas, List<Teste> testesSelecionados) {
+    print('aqui');
+    print(auxiliar.nome);
     atletas.forEach((element) {
       addFicha(new Ficha(
         idServerAuxiliar: auxiliar.idServer,

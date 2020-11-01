@@ -11,7 +11,7 @@ class _FormAuxiliarState extends State<FormAuxiliar> {
   @override
   Widget build(BuildContext context) {
     //ListRadioAuxiliar listRadio = Provider.of<ListRadioAuxiliar>(context);
-    Auxiliares listRadio = Provider.of<Auxiliares>(context);
+    Auxiliares listRadio = Provider.of<Auxiliares>(context, listen: false);
     //List<AuxiliarRadio> novo = retornoList(auxiliares);
     //print(novo[0].nomeAux);
 
@@ -44,8 +44,9 @@ class _FormAuxiliarState extends State<FormAuxiliar> {
                     groupValue: listRadio.chaveSelecionada,
                     onChanged: (value) {
                       setState(() {
+                        print(' aqui caralho ${listRadio.chaveSelecionada}');
                         listRadio.chaveSelecionada = value;
-                        //listRadio.atualizarSelecionado();
+                        listRadio.atualizarSelecionado();
                       });
                     },
                   ),

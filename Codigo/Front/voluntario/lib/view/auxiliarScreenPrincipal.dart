@@ -1,14 +1,13 @@
+import 'package:FisioAux/utils/app_routes.dart';
+import 'package:FisioAux/widgets/cardPedido.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  final void Function(int) mudarPagina;
-  HomeScreen(this.mudarPagina);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Principal'),
+        title: Text('FisioApp'),
         backgroundColor: Colors.grey,
       ),
       drawer: Drawer(
@@ -20,13 +19,39 @@ class HomeScreen extends StatelessWidget {
                         colors: <Color>[Colors.white, Colors.grey])),
                 child: Text('Menu Principal')),
             CustomTile(
-                Icons.account_circle, 'Cadastrar Atleta', () => mudarPagina(2)),
-            CustomTile(Icons.add_circle, 'Ridigez de RQ', () => mudarPagina(3)),
-            CustomTile(Icons.add_circle, 'Y Test', () => mudarPagina(4)),
-            CustomTile(Icons.add_circle, 'Star Test', () => mudarPagina(5)),
-            CustomTile(Icons.arrow_back, 'Sair', () => mudarPagina(0)),
+              Icons.account_circle,
+              'Cadastrar Atleta',
+              () => Navigator.of(context).pushNamed(
+                AppRoutes.AUTH_VOLUNTARY,
+              ),
+            ),
+            CustomTile(
+              Icons.account_circle,
+              'Adicionar Fisioterapeuta',
+              () => Navigator.of(context).pushNamed(
+                AppRoutes.AUTH_VOLUNTARY,
+              ),
+            ),
+            /*  CustomTile(Icons.add_circle, 'Ridigez de RQ', () {}),
+            CustomTile(Icons.add_circle, 'Y Test', () {}),
+            CustomTile(Icons.add_circle, 'Star Test', () {}),
+            CustomTile(Icons.add_circle, 'Hop Test', () {}),
+            CustomTile(Icons.add_circle, 'Closed Kinect Test', () {}),
+            CustomTile(Icons.add_circle, 'Dirsoflexão Test D/E ', () {}),
+            CustomTile(Icons.add_circle, 'Single Leg Bridge Test', () {}),*/
+            CustomTile(Icons.settings, 'Configurações', () {}),
+            CustomTile(Icons.arrow_back, 'Sair', () {}),
           ],
         ),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(
+          top: 40,
+          left: 20,
+          right: 20,
+          bottom: 20,
+        ),
+        child: CardPedido(),
       ),
     );
   }
