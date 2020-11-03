@@ -23,6 +23,7 @@ namespace Fisioterapia.App.Services {
         LoginResponse Update(int id, UpdateModel model);
         void Delete(int id);
         void Deactivate(int id);
+        IEnumerable<LoginResponse> GetAllAuxiliar(int id);
 
     }
 

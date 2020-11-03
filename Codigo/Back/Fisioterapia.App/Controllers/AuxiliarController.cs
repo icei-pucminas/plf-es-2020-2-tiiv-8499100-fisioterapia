@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Fisioterapia.App.Models.auxiliar;
 using Fisioterapia.Models.Entidades;
-using Fisioterapia.App.Helpers;
+
 
 namespace Fisioterapia.App.Controllers {
     [Route("[controller]")]
@@ -22,20 +22,21 @@ namespace Fisioterapia.App.Controllers {
             _mapper = mapper;
         }
 
-        [HttpPost("register_Aux")]
+        [HttpPost("register")]
         public IActionResult Register([FromBody]ModelAuxiliar model) {
+
             _auxiliarService.Criar(model);
             return Ok(new { message = "Cadastrado com sucesso!" });
         }
 
-        [HttpPut("{id}")]
+        [HttpPost("update")]
         public IActionResult Update(int id, [FromBody] UpdateAuxiliar model) {
 
             try { _auxiliarService.Update(id, model);
                 return Ok();
-            } catch (AppException ex) 
+            } catch 
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { message = "Erro ao  atualizar usuario!" });
             }
             
         }
@@ -43,6 +44,12 @@ namespace Fisioterapia.App.Controllers {
         public IActionResult Delete(int id) {
             _auxiliarService.Delete(id);
             return Ok(new { message = "Auxiliar excluido  com  sucesso!" });
+        }
+        [HttpPost("vincular")]
+        public IActionResult VincularAuxiliar([FromBody] AuxiliarVincular model) 
+        {
+            _auxiliarService.VincularAuxiliar(model);
+            return Ok(new { message = "Vinculado com  Sucesso!" });
         }
 
 

@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Azure.Identity;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Fisioterapia.App {
     public class Program {
@@ -11,7 +14,8 @@ namespace Fisioterapia.App {
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
-                    webBuilder.UseStartup<Startup>().UseUrls("http://localhost:4000");
+                    webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://localhost:4000");
                 });
     }
 }

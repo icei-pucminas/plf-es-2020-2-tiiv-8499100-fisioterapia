@@ -47,8 +47,8 @@ namespace Fisioterapia.Models.Migrations.SqlServerMigrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<bool>("OcoContusao")
-                        .HasColumnType("bit");
+                    b.Property<byte>("OcorreuContusao")
+                        .HasColumnType("tinyint");
 
                     b.Property<float>("Peso")
                         .HasColumnType("real");
@@ -74,7 +74,7 @@ namespace Fisioterapia.Models.Migrations.SqlServerMigrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Expiracao")
+                    b.Property<DateTime>("DataDeNacimento")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("IdUsuario")
@@ -200,8 +200,14 @@ namespace Fisioterapia.Models.Migrations.SqlServerMigrations
                     b.Property<bool>("AceitoTermos")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("Atualizado")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Codvinculo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Criado")
                         .HasColumnType("datetime2");

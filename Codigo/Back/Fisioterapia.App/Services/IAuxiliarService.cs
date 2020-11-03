@@ -8,8 +8,10 @@ namespace Fisioterapia.App.Services {
      public  interface IAuxiliarService {
         IEnumerable<ModelAuxiliarResponse> GetAll();
         ModelAuxiliarResponse GetById(int id);
-        ModelAuxiliarResponse Criar(ModelAuxiliar model);
+        void Criar(ModelAuxiliar model);
         ModelAuxiliarResponse Update(int id, UpdateAuxiliar model);
         void Delete(int id);
+
+        void VincularAuxiliar(AuxiliarVincular model);
     }
 }

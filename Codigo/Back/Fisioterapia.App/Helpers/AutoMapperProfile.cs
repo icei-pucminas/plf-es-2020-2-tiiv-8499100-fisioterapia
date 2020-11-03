@@ -23,6 +23,7 @@ namespace Fisioterapia.App.Helpers {
             CreateMap<ModelAuxiliar, Auxiliar>();
             CreateMap<ModelAuxiliar, Auxiliar>();
             CreateMap<UpdateAuxiliar, Auxiliar>();
+           
 
          
 

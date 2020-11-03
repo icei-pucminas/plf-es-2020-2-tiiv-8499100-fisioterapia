@@ -38,6 +38,7 @@ namespace Fisioterapia.App {
             services.Configure<AppSettings>(_configuration.GetSection("AppSettings"));
 
             services.AddScoped<IUsuarioServices, UsuarioService>();
+            services.AddScoped<IAuxiliarService, AuxiliarService>();
             services.AddScoped<IEmailService, EmailService>();
             
 

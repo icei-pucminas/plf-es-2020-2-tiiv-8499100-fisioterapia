@@ -12,7 +12,13 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("b532fc27-30d2-40bc-9a98-94f90551c5c1")]
-
+[assembly: System.Reflection.AssemblyCompanyAttribute("Fisioterapia.App")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyProductAttribute("Fisioterapia.App")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Fisioterapia.App")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
 

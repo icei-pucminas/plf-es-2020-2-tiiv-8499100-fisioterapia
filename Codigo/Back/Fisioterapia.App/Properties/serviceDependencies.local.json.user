@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2020-11-01T15:32:57.2466492Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2020-11-01T15:36:01.193934Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "ad6af6f2-7e6a-4213-a7ef-e1106008dd77"
+    },
+    "mssql1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "AlecrimDouradoWin"
+    }
+  }
+}

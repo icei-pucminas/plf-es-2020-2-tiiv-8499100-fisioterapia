@@ -32,8 +32,8 @@ namespace Fisioterapia.App.Controllers {
         [HttpPost("login")]
         public ActionResult<LoginResponse> Login([FromBody] LoginModel model) 
         {
-            var response = _usuarioServices.login(model, ipAcesso());
-            setTokenCookie(response.RecarregarToken);
+            var response = _usuarioServices.login(model, IpAcesso());
+            SetTokenCookie(response.RecarregarToken);
             return  Ok(response);
             
         }
@@ -45,7 +45,7 @@ namespace Fisioterapia.App.Controllers {
             return Ok(new {message = "Cadastrado com sucesso, por favor check o  seu email para verificação!" });
         }
 
-        private void setTokenCookie(string token) 
+        private void SetTokenCookie(string token) 
         {
             var cookieOption = new CookieOptions 
             {
@@ -54,7 +54,7 @@ namespace Fisioterapia.App.Controllers {
             };
             Response.Cookies.Append("refreshToken", token, cookieOption);
         }
-        private string ipAcesso() 
+        private string IpAcesso() 
         {
             if (Request.Headers.ContainsKey("X-Forwarded-For"))
                 return Request.Headers["X-Forwarded-For"];
@@ -66,6 +66,13 @@ namespace Fisioterapia.App.Controllers {
         public IActionResult Deactivate(int id) {
             _usuarioServices.Deactivate(id);
             return Ok(new { message = "Usuário desativado com sucesso!" });
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetAllAuxiliar(int id) 
+        {
+            var response = _usuarioServices.GetAllAuxiliar(id);
+            return Ok(response);
         }
 
     }

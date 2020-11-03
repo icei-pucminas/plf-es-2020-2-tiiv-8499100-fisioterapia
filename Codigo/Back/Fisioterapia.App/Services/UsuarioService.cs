@@ -15,6 +15,7 @@ using BC = BCrypt.Net.BCrypt;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fisioterapia.App.Services {
     public class UsuarioService : IUsuarioServices {
@@ -23,7 +24,7 @@ namespace Fisioterapia.App.Services {
         private readonly AppSettings _appSetting;
         private readonly IEmailService _emailService;
 
-        public UsuarioService(DataContext context, IMapper mapper, IOptions<AppSettings> appSettings,IEmailService emailService) {
+        public UsuarioService(DataContext context, IMapper mapper, IOptions<AppSettings> appSettings, IEmailService emailService) {
             _context = context;
             _mapper = mapper;
             _appSetting = appSettings.Value;
@@ -37,6 +38,10 @@ namespace Fisioterapia.App.Services {
             var usuario = _mapper.Map<Usuarios>(model);
             usuario.Criado = DateTime.UtcNow;
             usuario.Verificado = DateTime.UtcNow;
+
+
+            usuario.Codvinculo = "H589LC";
+
             //hash senha
             usuario.SenhaHash = BC.HashPassword(model.Senha);
             //salvar a conta
@@ -64,8 +69,9 @@ namespace Fisioterapia.App.Services {
 
         public LoginResponse login(LoginModel model, string ipAcesso) {
             var usuario = _context.Usuarios.SingleOrDefault(x => x.Email == model.Email);
-            if (usuario == null || !usuario.IsVerificado || BC.Verify(BC.HashPassword(model.Senha), usuario.SenhaHash))
+            if (usuario == null || BC.Verify(BC.HashPassword(model.Senha), usuario.SenhaHash))
                 throw new AppException("Email ou Senha estar Incorreto!");
+            //!usuario.IsVerificado
             var JwtToken = generateJwtToken(usuario);
             var refreshToken = generateRefreshToken(ipAcesso);
             usuario.RecarregarToken.Add(refreshToken);
@@ -87,17 +93,16 @@ namespace Fisioterapia.App.Services {
             _context.SaveChanges();
 
             //falta o  envio  de email
-            
+
         }
-      
+
         public LoginResponse RefreshToken(string token, string ipAcesso) {
             throw new NotImplementedException();
         }
 
         public void Register(RegisterModel model, string origin) {
             //validate
-            if (_context.Usuarios.Any(x => x.Email == model.Email)) 
-            {
+            if (_context.Usuarios.Any(x => x.Email == model.Email)) {
                 // enviar erro já registrado no e-mail para evitar enumeração de conta
                 //não implemetado ainda 
             }
@@ -155,80 +160,71 @@ namespace Fisioterapia.App.Services {
             _context.SaveChanges();
         }
 
-        private string generateJwtToken(Usuarios usuarios) 
-        {
+        private string generateJwtToken(Usuarios usuarios) {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSetting.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor 
-            {
-                Subject = new ClaimsIdentity(new[] {new Claim("id", usuarios.Id.ToString()) }),
+            var tokenDescriptor = new SecurityTokenDescriptor {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", usuarios.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddMinutes(15),
-                SigningCredentials = new SigningCredentials( new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
 
 
         }
-        private RefreshToken generateRefreshToken(string ipAcesso) 
-        {
-            return new RefreshToken 
-            {
+        private RefreshToken generateRefreshToken(string ipAcesso) {
+            return new RefreshToken {
                 Token = randomTokenString(),
                 Expires = DateTime.UtcNow.AddDays(7),
                 Created = DateTime.UtcNow,
                 CreatedById = ipAcesso
             };
-        
+
         }
-        private string randomTokenString() 
-        {
+        private string randomTokenString() {
             using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
             var randomBytes = new byte[40];
             rngCryptoServiceProvider.GetBytes(randomBytes);
             //converte random bytes de hex string
 
-            return BitConverter.ToString(randomBytes).Replace("-","");
+            return BitConverter.ToString(randomBytes).Replace("-", "");
         }
 
-        private (RefreshToken, Usuarios) getRefreshToken(string token) 
-        {
+        private (RefreshToken, Usuarios) getRefreshToken(string token) {
             var usuario = _context.Usuarios.SingleOrDefault(u => u.RecarregarToken.Any(t => t.Token == token));
             if (usuario == null) throw new AppException("Token Invalido!");
             var refreshToken = usuario.RecarregarToken.Single(x => x.Token == token);
             if (!refreshToken.IsActive) throw new AppException("Token Invalido!");
             return (refreshToken, usuario);
         }
-        private Usuarios getUsuario(int id) 
-        {
+        private Usuarios getUsuario(int id) {
             var usuario = _context.Usuarios.Find(id);
             if (usuario == null) throw new KeyNotFoundException("Usuario não encontrado!");
             return usuario;
         }
 
-        private void EnviarVerificarEmail(Usuarios usuarios, string origem) 
-        {
+        private void EnviarVerificarEmail(Usuarios usuarios, string origem) {
             string messagem;
             if (!string.IsNullOrEmpty(origem)) {
                 var verifiUrl = $"{origem}/Usuario/VerificarEmail?={usuarios.VerificacaoToken}";
                 messagem = $@"<p>Por vafor click no link abaixo  para verificar o  email de acesso</p>
                             <p><a href=""{verifiUrl}"">{verifiUrl}</a></p>";
-            } else 
-            {
+            } else {
                 messagem = $@"<p>Please use the below token to verify your email address with the <code>/accounts/verify-email</code> api route:</p>
                              <p><code>{usuarios.VerificacaoToken}</code></p>";
             }
             _emailService.Send(
                 to: usuarios.Email,
-                subject:"Sign-up verificação API - Verificar Email",
-                html:$@"<h4> Verificar Email</h4>
+                subject: "Sign-up verificação API - Verificar Email",
+                html: $@"<h4> Verificar Email</h4>
                  <p>Obrigado por se registrar</p>
                     {messagem}"
-                
+
                 );
         }
 
-      
+
 
         public void Deactivate(int id) {
             var user = getUsuario(id);
@@ -239,6 +235,17 @@ namespace Fisioterapia.App.Services {
                 _context.SaveChanges();
             } else
                 throw new ApplicationException("Usuário não encontrado!");
+        }
+
+        public IEnumerable<LoginResponse> GetAllAuxiliar(int id) {
+            var usuario = _context.AuxiliarUsuarios.Where(a => a.IdUsuario == id);
+            List<Usuarios> UsuarioAuxiliar = new List<Usuarios>();
+            foreach (var item in usuario) {
+                var auxiliar = _context.Usuarios.SingleOrDefault(u => u.Id == item.IdUsuario);
+                if (auxiliar != null)
+                    UsuarioAuxiliar.Add(auxiliar);
+            }
+            return _mapper.Map<IList<LoginResponse>>(UsuarioAuxiliar);
         }
     }
 }

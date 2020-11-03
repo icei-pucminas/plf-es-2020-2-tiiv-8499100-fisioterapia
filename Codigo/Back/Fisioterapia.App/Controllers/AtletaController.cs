@@ -36,6 +36,17 @@ namespace Fisioterapia.App.Controllers
 
             return Ok(new { message = "Atleta atualizado com sucesso!" });
         }
+        [HttpGet("getallatleta")]
+        public IEnumerable<ResponseAtletaModel> GetAll() 
+        {
+            var atleta = _atletaService.GetAll();
+            return atleta;
+        }
+        [HttpGet("getAtleta")]
+        public ActionResult<ResponseAtletaModel> GetAll(int Id) {
+            var atleta = _atletaService.GetById(Id);
+            return atleta;
+        }
     }
 
 }

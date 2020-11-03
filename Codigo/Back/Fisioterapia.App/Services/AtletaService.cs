@@ -30,6 +30,7 @@ namespace Fisioterapia.App.Services
             if (_context.Atletas.Any(x => x.Email == model.Email))
                 throw new AppException($"Atleta '{ model.Nome }' já está cadastrado!");
 
+
             var atleta = _mapper.Map<Atleta>(model);
             _context.Atletas.Add(atleta);
             _context.SaveChanges();
@@ -48,5 +49,22 @@ namespace Fisioterapia.App.Services
                 throw new AppException("Não foi possível atualizar os dados do atleta!");
             }
         }
+
+        public IEnumerable<ResponseAtletaModel> GetAll() {
+            var atletas = _context.Atletas;
+            return _mapper.Map<IList<ResponseAtletaModel>>(atletas);
+        }
+
+        public ResponseAtletaModel GetById(int id) {
+            var atleta = getAtleta(id);
+            return _mapper.Map<ResponseAtletaModel>(atleta);
+        }
+
+        private Atleta getAtleta(int id) {
+            var atleta = _context.Atletas.Find(id);
+            if (atleta == null) throw new KeyNotFoundException("Usuario não encontrado!");
+            return atleta;
+        }
+
     }
 }

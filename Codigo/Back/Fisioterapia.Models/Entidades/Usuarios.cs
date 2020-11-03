@@ -11,6 +11,7 @@ namespace Fisioterapia.Models.Entidades {
         public bool AceitoTermos { get; set; }
         public Role Role { get; set; }
         public string VerificacaoToken { get; set; }
+        public string Codvinculo { get; set; }
         public DateTime? Verificado { get; set; }
         public bool IsVerificado => Verificado.HasValue || SenhaReset.HasValue;
         public string ResetToken { get; set; }

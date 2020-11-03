@@ -7,8 +7,6 @@ namespace Fisioterapia.App.Models.auxiliar {
     public class ModelAuxiliarResponse {
         public string Instituicao { get; set; }
         public int Periodo { get; set; }
-        public DateTime Expiracao { get; set; }
-        public int IdUsuario { get; set; }
         public string CPF { get; set; }
     }
 }

@@ -13,12 +13,10 @@ namespace Fisioterapia.App.Services {
 
         void Delete(int id);
 
-       DisponibilizarExameResponse  DisponibilizarExame(int id);
+        DisponibilizarExameResponse  DisponibilizarExame(int id);
 
         AdicionarExerciciosResponse AdicionarExercicios(int[] id);
         UpdateExerciciosExameResponser RemoverExercicios(int[]id);
-
-
-
+        IEnumerable<ExameExercicios> GetAllExercicios(int id);
     }
 }
