@@ -45,7 +45,7 @@ class _FichasFormState extends State<FichasForm> {
           ),
         ),
         backgroundColor: Colors.teal[600],
-        titleSpacing: 60,
+        centerTitle: true,
       ),
       body: Stepper(
         type: StepperType.horizontal,
@@ -81,6 +81,7 @@ class _FichasFormState extends State<FichasForm> {
               this._currentStep = this._currentStep - 1;
             } else {
               this._currentStep = 0;
+              Navigator.of(context).pop();
             }
           });
         },

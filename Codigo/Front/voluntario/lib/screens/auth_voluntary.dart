@@ -1,6 +1,6 @@
-import 'package:FisioAux/provider/model_voluntarys.dart';
-import 'package:FisioAux/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_fisio/provider/model_voluntarys.dart';
+import 'package:projeto_fisio/utils/app_routes.dart';
 
 import 'package:provider/provider.dart';
 
@@ -30,6 +30,20 @@ class _VoluntaryFormState extends State<VoluntaryForm> {
     final halfMediaWidth = MediaQuery.of(context).size.width / 2.0;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: FlatButton(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text('Formulário de cadastro'),
+        centerTitle: true,
+        backgroundColor: Colors.teal[600],
+      ),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
@@ -295,14 +309,32 @@ class _VoluntaryFormState extends State<VoluntaryForm> {
                   ],
                 ),
                 RaisedButton(
-                  color: Colors.grey,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: Colors.teal[700],
                   child: Text(
                     'Salvar',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  onPressed: () => {
+                  onPressed: () {
+                    Provider.of<ModelsVoluntarys>(context, listen: false)
+                        .voluntarys
+                        .add(new Model(
+                            firstName: nomeController.text,
+                            lastName: sobreNomeController.text,
+                            email: emailController.text,
+                            idade: idadeController.text,
+                            sideDominant: sideDominantController.text,
+                            number: numberController.text,
+                            position: positionController.text,
+                            weight: weightController.text,
+                            height: heightController.text,
+                            cellphone: cellphoneController.text,
+                            profession: professionController.text));
+
                     Provider.of<ModelsVoluntarys>(context, listen: false)
                         .enviarVoluntarios(new Model(
                       firstName: nomeController.text,
@@ -316,14 +348,17 @@ class _VoluntaryFormState extends State<VoluntaryForm> {
                       height: heightController.text,
                       cellphone: cellphoneController.text,
                       profession: professionController.text,
-                    )),
-                    print('entra'),
+                    ));
+
                     Navigator.of(context)
-                        .pushNamed(AppRoutes.RESULT_AUTH_VOLUNTARY),
+                        .pushNamed(AppRoutes.RESULT_AUTH_VOLUNTARY);
                   },
                 ),
                 RaisedButton(
-                  color: Colors.grey,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: Colors.teal[700],
                   child: Text(
                     'Voltar',
                     style: TextStyle(

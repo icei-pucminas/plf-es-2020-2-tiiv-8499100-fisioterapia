@@ -3,18 +3,18 @@ import 'package:projeto_fisio/provider/auxFichas.dart';
 import 'package:projeto_fisio/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
-class CalcRQ extends StatefulWidget {
+class Dirsoflexao extends StatefulWidget {
   final int idExame;
   final int idTeste;
 
-  CalcRQ(this.idExame, this.idTeste);
+  Dirsoflexao(this.idExame, this.idTeste);
   @override
-  _CalcRQState createState() => _CalcRQState();
+  _Dirsoflexao createState() => _Dirsoflexao();
 }
 
-class _CalcRQState extends State<CalcRQ> {
-  String infoText = "Grau de Rigidez";
-  String infoText1 = "Grau de Rigidez";
+class _Dirsoflexao extends State<Dirsoflexao> {
+  String infoText = "Valor Referência Membro Direito ";
+  String infoText1 = "Valor Referência Membro Esquerdo";
   TextEditingController membroDireito = TextEditingController();
   TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
@@ -36,26 +36,25 @@ class _CalcRQState extends State<CalcRQ> {
     setState(() {
       membroDireito.text = "";
       membroEsquerdo.text = "";
-      infoText = "Grau de Rigidez";
-      infoText1 = "Grau de Rigidez";
+      infoText = "Valor de Referencia Membro Direito";
+      infoText1 = "Valor de Referencia Membro Esquerdo";
     });
   }
 
   void _calculate() {
-    FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
     int mDireito = int.parse(membroDireito.text);
     int mEsquerdo = int.parse(membroEsquerdo.text);
+    FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
+
     setState(() {
-      if (mDireito < 30) {
-        infoText = "Alta Rigidez";
-      } else if (mDireito > 40) {
-        infoText = "Baixa Rigidez";
-      }
-      if (mEsquerdo < 30) {
-        infoText1 = "Alta Rigidez";
-      } else if (mEsquerdo > 40) {
-        infoText1 = "Baixa Rigidez";
-      }
+      if (mDireito >= 33.6 && mDireito <= 44) {
+        infoText = "Valor entre 33.6° - 44°";
+      } else
+        infoText = "Valor fora de 33.6° - 44°";
+      if (mEsquerdo >= 33.6 && mEsquerdo <= 44) {
+        infoText1 = "Valor entre 33.6° - 44°";
+      } else
+        infoText1 = "Valor fora de 33.6° - 44°";
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
@@ -74,7 +73,7 @@ class _CalcRQState extends State<CalcRQ> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text("Rigidez de RQ"),
+        title: Text(" Dirsoflexão Test"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(

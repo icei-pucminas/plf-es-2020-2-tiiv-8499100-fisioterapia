@@ -19,7 +19,7 @@ class FichasList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Fichas fichasClass = Provider.of<Fichas>(context);
-    List<Ficha> lista = fichasClass.listaFichas;
+    List<Ficha> lista = fichasClass.fichasCarregadas;
     mostrarFicha(lista);
 
     return Container(

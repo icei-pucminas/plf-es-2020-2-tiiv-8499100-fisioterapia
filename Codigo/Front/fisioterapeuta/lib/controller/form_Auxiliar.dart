@@ -10,20 +10,14 @@ class FormAuxiliar extends StatefulWidget {
 class _FormAuxiliarState extends State<FormAuxiliar> {
   @override
   Widget build(BuildContext context) {
-    //ListRadioAuxiliar listRadio = Provider.of<ListRadioAuxiliar>(context);
     Auxiliares listRadio = Provider.of<Auxiliares>(context, listen: false);
-    //List<AuxiliarRadio> novo = retornoList(auxiliares);
-    //print(novo[0].nomeAux);
 
-    //listRadio.receberListaAuxiliar(auxiliares.listaAux);
-    //print(listRadio.listAuxRadio[2].selecionado);
     return Container(
       height: 400,
       padding: EdgeInsets.only(
         right: 20,
         left: 20,
       ),
-      // child: ListView.builder(itemBuilder: null),
       child: Center(
         child: ListView.builder(
           itemCount: listRadio.listaAux.length,
@@ -37,6 +31,7 @@ class _FormAuxiliarState extends State<FormAuxiliar> {
                       color: Colors.teal[700],
                       width: 2,
                     ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: RadioListTile(
                     title: Text('${radioAux.nome}'),
@@ -44,7 +39,6 @@ class _FormAuxiliarState extends State<FormAuxiliar> {
                     groupValue: listRadio.chaveSelecionada,
                     onChanged: (value) {
                       setState(() {
-                        print(' aqui caralho ${listRadio.chaveSelecionada}');
                         listRadio.chaveSelecionada = value;
                         listRadio.atualizarSelecionado();
                       });

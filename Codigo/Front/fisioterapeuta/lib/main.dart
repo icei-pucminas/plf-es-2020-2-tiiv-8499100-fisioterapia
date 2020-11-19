@@ -1,4 +1,5 @@
 import 'package:FisioApp/controller/atleta_view.dart';
+import 'package:FisioApp/controller/atletas_form.dart';
 import 'package:FisioApp/controller/auxiliar_screens.dart';
 import 'package:FisioApp/controller/contaUsuario.dart';
 import 'package:FisioApp/controller/fichas_Form.dart';
@@ -81,6 +82,7 @@ class FisioApp extends StatelessWidget {
           AppRoutes.FICHAS: (ctx) => FichasView(),
           AppRoutes.ATLETAS: (ctx) => AtletaView(),
           AppRoutes.FICHAS_FORMULARIO: (ctx) => FichasForm(),
+          AppRoutes.ATLETAS_FORM: (ctx) => AtletasForm(),
         },
         debugShowCheckedModeBanner: false,
       ),

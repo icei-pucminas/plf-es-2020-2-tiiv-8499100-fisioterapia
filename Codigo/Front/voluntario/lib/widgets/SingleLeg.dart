@@ -3,18 +3,18 @@ import 'package:projeto_fisio/provider/auxFichas.dart';
 import 'package:projeto_fisio/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
-class CalcRQ extends StatefulWidget {
+class SingleLeg extends StatefulWidget {
   final int idExame;
   final int idTeste;
 
-  CalcRQ(this.idExame, this.idTeste);
+  SingleLeg(this.idExame, this.idTeste);
   @override
-  _CalcRQState createState() => _CalcRQState();
+  _SingleLeg createState() => _SingleLeg();
 }
 
-class _CalcRQState extends State<CalcRQ> {
-  String infoText = "Grau de Rigidez";
-  String infoText1 = "Grau de Rigidez";
+class _SingleLeg extends State<SingleLeg> {
+  String infoText = "Quantidade de Repetições realziados MD ";
+  String infoText1 = "Quantidade de Repetiçoes realziados ME";
   TextEditingController membroDireito = TextEditingController();
   TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
@@ -32,30 +32,11 @@ class _CalcRQState extends State<CalcRQ> {
     );
   }
 
-  void _resetField() {
-    setState(() {
-      membroDireito.text = "";
-      membroEsquerdo.text = "";
-      infoText = "Grau de Rigidez";
-      infoText1 = "Grau de Rigidez";
-    });
-  }
-
-  void _calculate() {
+  void _concatenarCampos() {
     FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
-    int mDireito = int.parse(membroDireito.text);
-    int mEsquerdo = int.parse(membroEsquerdo.text);
     setState(() {
-      if (mDireito < 30) {
-        infoText = "Alta Rigidez";
-      } else if (mDireito > 40) {
-        infoText = "Baixa Rigidez";
-      }
-      if (mEsquerdo < 30) {
-        infoText1 = "Alta Rigidez";
-      } else if (mEsquerdo > 40) {
-        infoText1 = "Baixa Rigidez";
-      }
+      infoText = "Quantidade de toques realziados MD ${membroDireito.text}";
+      infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
@@ -69,12 +50,21 @@ class _CalcRQState extends State<CalcRQ> {
     });
   }
 
+  void _resetField() {
+    setState(() {
+      membroDireito.text = "";
+      membroEsquerdo.text = "";
+      infoText = "Quantidade de Repetições realizados MD";
+      infoText1 = "Quantidade de Repetições realizados ME";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text("Rigidez de RQ"),
+        title: Text(" Single Leg Test "),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -128,7 +118,7 @@ class _CalcRQState extends State<CalcRQ> {
                             ),
                             onPressed: () {
                               setState(() {
-                                _calculate();
+                                _concatenarCampos();
                               });
                             },
                           )

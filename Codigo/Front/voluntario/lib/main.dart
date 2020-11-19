@@ -1,18 +1,17 @@
-import 'package:FisioAux/acessoConta/login.dart';
-import 'package:FisioAux/provider/auth.dart';
-import 'package:FisioAux/provider/auxFichas.dart';
-import 'package:FisioAux/provider/model_voluntarys.dart';
-import 'package:FisioAux/utils/app_routes.dart';
-import 'package:FisioAux/view/auth_Ou_Fichas.dart';
-import 'package:FisioAux/view/auxiliarScreenPrincipal.dart';
-import 'package:FisioAux/view/result.dart';
-import 'package:FisioAux/widgets/calc_Rq.dart';
-import 'package:FisioAux/widgets/calc_Star.dart';
-import 'package:FisioAux/widgets/calc_Y.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_fisio/acessoConta/login.dart';
+import 'package:projeto_fisio/provider/auth.dart';
+import 'package:projeto_fisio/provider/auxFichas.dart';
+import 'package:projeto_fisio/provider/contaDoUsuario.dart';
+import 'package:projeto_fisio/provider/model_voluntarys.dart';
+import 'package:projeto_fisio/utils/app_routes.dart';
+import 'package:projeto_fisio/view/auth_Ou_Fichas.dart';
+import 'package:projeto_fisio/view/auxiliarScreenPrincipal.dart';
+import 'package:projeto_fisio/view/pedidosCadastro.dart';
+import 'package:projeto_fisio/view/result.dart';
 import 'package:provider/provider.dart';
 
-import 'controller/auth_voluntary.dart';
+import 'screens/auth_voluntary.dart';
 
 void main() {
   runApp(FisioApp());
@@ -26,11 +25,26 @@ class FisioApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => new Auth(),
         ),
-        ChangeNotifierProvider<ModelsVoluntarys>(
-          create: (_) => new ModelsVoluntarys(),
+        ChangeNotifierProxyProvider<Auth, ContaUsuario>(
+          create: (_) => new ContaUsuario(null, null),
+          update: (ctx, auth, previous) => new ContaUsuario(
+            auth.token,
+            auth.userId,
+          ),
         ),
-        ChangeNotifierProvider<FichasAux>(
-          create: (_) => new FichasAux(),
+        ChangeNotifierProxyProvider<Auth, FichasAux>(
+          create: (_) => new FichasAux(null, null),
+          update: (ctx, auth, previous) => new FichasAux(
+            auth.token,
+            auth.userId,
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, ModelsVoluntarys>(
+          create: (_) => new ModelsVoluntarys(null, null),
+          update: (ctx, auth, previous) => new ModelsVoluntarys(
+            auth.token,
+            auth.userId,
+          ),
         ),
       ],
       child: MaterialApp(
@@ -41,26 +55,10 @@ class FisioApp extends StatelessWidget {
           AppRoutes.AUX_HOME_SCREEN: (ctx) => HomeScreen(),
           AppRoutes.AUTH_VOLUNTARY: (ctx) => VoluntaryForm(),
           AppRoutes.RESULT_AUTH_VOLUNTARY: (ctx) => Result(),
-          AppRoutes.CALC_RQ: (ctx) => CalcRQ(),
-          AppRoutes.CALC_Y: (ctx) => CalcY(),
-          AppRoutes.CALC_STAR: (ctx) => CalcStar(),
+          AppRoutes.CARD_PEDIDO_ATLETA: (ctx) => PedidoCadastro(),
         },
         debugShowCheckedModeBanner: false,
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(child: Login()),
     );
   }
 }

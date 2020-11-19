@@ -11,6 +11,5 @@ class ContaUsuario with ChangeNotifier {
     this.idUser,
     this.nome,
     this.codVinculo,
-    /* this.codVinculo */
   );
 }

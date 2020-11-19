@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class Model {
   String firstName;
@@ -29,25 +31,76 @@ class Model {
   });
 }
 
-class PedidoCadastro {
+class PedidoCadastroCard {
   String nomeFisio;
   String nomeAtl;
-  String status;
+  bool status;
+  PedidoCadastroCard({this.nomeFisio, this.nomeAtl, this.status = false});
 }
 
 class ModelsVoluntarys with ChangeNotifier {
-  //String url = 'https://flutter-testereq.firebaseio.com/'
-  List<Model> voluntarys = [];
-  List<Model> volTeste = [];
+  String _userId;
+  String _token;
+  ModelsVoluntarys(this._token, this._userId);
 
-  void enviarVoluntarios(Model voluntary) {
-    voluntarys.add(voluntary);
-    //post(url)
-    notifyListeners();
+  List<PedidoCadastroCard> pedidosCarregados = [];
+  List<Model> volTeste = [];
+  Model atletaCadastrado;
+  List<Model> voluntarys = [];
+
+  Future<void> receberPedido() async {
+    final response = await http
+        .get('https://fisioterapiaapp1.azurewebsites.net/Pedidos/$_userId');
+    List<dynamic> data = json.decode(response.body);
+
+    if (data != null) {
+      pedidosCarregados.clear();
+      data.forEach((pedido) {
+        pedidosCarregados.add(PedidoCadastroCard(
+          nomeAtl: pedido['nomeAlteta'],
+          nomeFisio: pedido['fisioterapeuta'],
+        ));
+      });
+    }
+    return Future.value();
   }
 
-  Model retornarUltimoModel() {
-    print('esta retornando');
-    return voluntarys[voluntarys.length - 1];
+  Future<void> enviarVoluntarios(Model atleta) async {
+    final url =
+        'https://fisioterapiaapp1.azurewebsites.net/Atleta/cadastrarAtleta';
+    print('aqui');
+
+    final response = await http.post(url,
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json"
+        },
+        body: json.encode({
+          'Nome': atleta.firstName,
+          'Email': atleta.email,
+          'Idade': '2020-10-23',
+          'LadoDominante': atleta.sideDominant,
+          'Numero': int.parse(atleta.number),
+          'Posicao': atleta.position,
+          'Peso': double.parse(atleta.weight),
+          'Altura': double.parse(atleta.height),
+          'Celular': atleta.cellphone,
+          'Profissao': atleta.profession,
+          'OcorreuContusao': true,
+        }));
+
+    notifyListeners();
+
+    return Future.value();
+  }
+
+  Future<void> retornarAtleta() async {
+    final response = await http
+        .get('https://fisioterapiaapp1.azurewebsites.net/Atleta/getallatleta');
+    List<dynamic> data = json.decode(response.body);
+    print('lista de atletas : ');
+    print(data);
+    notifyListeners();
+    return Future.value();
   }
 }

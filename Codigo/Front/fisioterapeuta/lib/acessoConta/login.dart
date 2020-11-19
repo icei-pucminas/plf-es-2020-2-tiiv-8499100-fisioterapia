@@ -77,13 +77,16 @@ class _LoginState extends State<Login> {
 
     try {
       if (_authMode == AuthMode.Login) {
-        print('para realizar login');
-        await auth.login(
-          _authData["email"],
-          _authData["senha"],
-        );
+        if (_authData["senha"].contains("k")) {
+          ExcecaoAcesso erro = new ExcecaoAcesso('INVALID_PASSWORD');
+          _showErrorDialog(erro.toString());
+        } else {
+          await auth.login(
+            _authData["email"],
+            _authData["senha"],
+          );
+        }
       } else {
-        print('para realizar cadastro');
         await auth.signup(
           _authData["nome"],
           _authData["email"],
@@ -122,7 +125,7 @@ class _LoginState extends State<Login> {
         color: Colors.white30,
         child: Container(
           margin: EdgeInsets.only(
-            top: 60,
+            top: 40,
             left: 40,
             right: 40,
           ),
@@ -131,8 +134,8 @@ class _LoginState extends State<Login> {
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+                    horizontal: 10,
+                    vertical: 10,
                   ),
                   height: 560,
                   child: Form(
@@ -198,7 +201,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         TextFormField(
                           keyboardType: TextInputType.text,

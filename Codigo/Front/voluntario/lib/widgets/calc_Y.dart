@@ -1,7 +1,13 @@
-import 'package:FisioAux/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_fisio/provider/auxFichas.dart';
+import 'package:projeto_fisio/utils/app_routes.dart';
+import 'package:provider/provider.dart';
 
 class CalcY extends StatefulWidget {
+  final int idExame;
+  final int idTeste;
+  CalcY(this.idExame, this.idTeste);
+
   @override
   _CalcYState createState() => _CalcYState();
 }
@@ -24,6 +30,9 @@ class _CalcYState extends State<CalcY> {
   TextEditingController posteroMedialE = TextEditingController();
   TextEditingController mostrarResultado = TextEditingController();
   TextEditingController mostrarResultadoE = TextEditingController();
+
+  var verificarTeste = true;
+  TestePendente teste;
 
   Widget buildTextfield(String label, TextEditingController controll) {
     return TextField(
@@ -53,6 +62,7 @@ class _CalcYState extends State<CalcY> {
   }
 
   void _calculate() {
+    FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
     int mDireito = int.parse(membroDireito.text);
     int mEsquerdo = int.parse(membroEsquerdo.text);
     int anterior = int.parse(direcaoAnteriorD.text);
@@ -68,6 +78,21 @@ class _CalcYState extends State<CalcY> {
     setState(() {
       infoText4 = "Resultado Lado Direito:  " + ("$resultadoD");
       infoText5 = "Resultado Lado Esquerdo: " + ("$resultadoE");
+      teste = fichasAux.inserirRespostaTesteOitoValores(
+        widget.idExame,
+        widget.idTeste,
+        membroDireito.text,
+        membroEsquerdo.text,
+        direcaoAnteriorD.text,
+        direcaoAnteriorE.text,
+        posteroLateral.text,
+        posteroLateralE.text,
+        posteroMedial.text,
+        posteroMedialE.text,
+        infoText4,
+        infoText5,
+      );
+      verificarTeste = false;
     });
   }
 
@@ -75,7 +100,7 @@ class _CalcYState extends State<CalcY> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.teal[600],
         title: Text("Y Balance Test"),
         centerTitle: true,
         actions: <Widget>[
@@ -206,16 +231,40 @@ class _CalcYState extends State<CalcY> {
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
                     height: 40.0,
-                    child: RaisedButton(
-                      child: Text(
-                        "Verificar",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 20.0),
-                      ),
-                      onPressed: () {
-                        _calculate();
-                      },
-                    ),
+                    child: verificarTeste
+                        ? RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            color: Colors.teal[700],
+                            child: Text(
+                              "Verificar",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _calculate();
+                              });
+                            },
+                          )
+                        : RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            color: Colors.teal[700],
+                            child: Text(
+                              "Enviar",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                Provider.of<FichasAux>(context, listen: false)
+                                    .enviarExerciciosRespondidos(teste);
+                              });
+                            },
+                          ),
                   ),
                 ),
                 //botão de voltar
@@ -225,6 +274,10 @@ class _CalcYState extends State<CalcY> {
                   child: Container(
                     height: 40.0,
                     child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      color: Colors.teal[700],
                       child: Text(
                         "Voltar",
                         style: TextStyle(color: Colors.white, fontSize: 20.0),

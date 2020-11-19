@@ -6,19 +6,28 @@ import 'package:provider/provider.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget _createItem(IconData icon, String label, Function onTap) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        size: 25,
-      ),
-      title: Text(
-        label,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.grey.shade400),
         ),
       ),
-      onTap: onTap,
+      child: ListTile(
+        leading: Icon(
+          icon,
+          size: 25,
+          color: Colors.teal[800],
+        ),
+        title: Text(
+          label,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey[800],
+          ),
+        ),
+        onTap: onTap,
+      ),
     );
   }
 
@@ -38,7 +47,6 @@ class MainDrawer extends StatelessWidget {
               right: 10,
             ),
             color: Colors.teal[600],
-            // alignment: Alignment.bottomRight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,8 +57,6 @@ class MainDrawer extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-                      //crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Icon(
                           Icons.person,
@@ -101,24 +107,27 @@ class MainDrawer extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
+          Container(
+            color: Colors.grey[200],
+            child: Column(
+              children: <Widget>[
+                _createItem(Icons.list, 'Fichas',
+                    () => Navigator.of(context).pushNamed(AppRoutes.FICHAS)),
+                _createItem(
+                    Icons.group,
+                    'Auxiliares',
+                    () =>
+                        Navigator.of(context).pushNamed(AppRoutes.AUXILIARES)),
+                _createItem(Icons.group, 'Atletas',
+                    () => Navigator.of(context).pushNamed(AppRoutes.ATLETAS)),
+                _createItem(Icons.exit_to_app, 'Sair', () {
+                  Auth sair = Provider.of<Auth>(context, listen: false);
+                  sair.logout();
+                  Navigator.of(context).pushNamed(AppRoutes.AUTHOUFICHAS);
+                }),
+              ],
+            ),
           ),
-          _createItem(Icons.list, 'Fichas',
-              () => Navigator.of(context).pushNamed(AppRoutes.FICHAS)),
-          _createItem(Icons.group, 'Auxiliares',
-              () => Navigator.of(context).pushNamed(AppRoutes.AUXILIARES)),
-          _createItem(Icons.group, 'Atletas',
-              () => Navigator.of(context).pushNamed(AppRoutes.ATLETAS)),
-          /*_createItem(Icons.exit_to_app, 'Sair',
-              () => Navigator.of(context).pushNamed(AppRoutes.LOGIN)),*/
-          _createItem(Icons.exit_to_app, 'Sair', () {
-            Auth sair = Provider.of<Auth>(context, listen: false);
-            sair.logout();
-            Navigator.of(context).pushNamed(AppRoutes.AUTHOUFICHAS);
-          }),
-          /*_createItem(Icons.exit_to_app, 'Sair',
-              () => Navigator.of(context).pushNamed(AppRoutes.CONFIGURACOES)),*/
         ],
       ),
     );
