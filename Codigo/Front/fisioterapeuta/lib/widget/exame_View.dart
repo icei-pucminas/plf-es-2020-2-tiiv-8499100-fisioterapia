@@ -213,7 +213,7 @@ class _ExameViewState extends State<ExameView> {
                                               });
                                             },
                                             child: Text(
-                                              ' ${teste.nomeTeste} ',
+                                              ' ${teste.nomeLayout} ',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15,
@@ -226,7 +226,7 @@ class _ExameViewState extends State<ExameView> {
                                                 MainAxisAlignment.center,
                                             children: <Widget>[
                                               Text(
-                                                ' ${teste.nomeTeste} ',
+                                                ' ${teste.nomeLayout} ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 15,

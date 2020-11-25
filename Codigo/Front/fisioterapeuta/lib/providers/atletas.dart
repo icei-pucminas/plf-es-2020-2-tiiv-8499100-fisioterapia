@@ -22,7 +22,7 @@ class Atletas with ChangeNotifier {
       },
       body: json.encode({
         'IdUsuario': idus,
-        'NomeAtelta': nomeInserido,
+        'NomeAtleta': nomeInserido,
         'IdAuxiliar': idaux,
       }),
     );

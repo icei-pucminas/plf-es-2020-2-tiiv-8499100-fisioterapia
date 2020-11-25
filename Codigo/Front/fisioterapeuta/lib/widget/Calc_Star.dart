@@ -18,7 +18,7 @@ class CalcStar extends StatelessWidget {
         backgroundColor: Colors.teal[600],
         titleSpacing: 60,
         title: Text(
-          teste.nomeTeste,
+          teste.nomeLayout,
           style: TextStyle(
             color: Colors.white,
             fontSize: 30,
@@ -133,6 +133,9 @@ class CalcStar extends StatelessWidget {
                 height: MediaQuery.of(context).size.width * 0.04,
               ),
               FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 color: Colors.teal[600],
                 onPressed: () {
                   Navigator.of(context).pop();

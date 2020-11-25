@@ -11,10 +11,8 @@ class ContaUsuario with ChangeNotifier {
   ContaUsuario(this._token, this._idUser);
 
   Future<void> vincComFisio(String codigo) async {
-    print('id do usuario : $_idUser');
     final url = 'https://fisioterapiaapp1.azurewebsites.net/Auxiliar/vincular';
-    print('Realizando associacao');
-    print('codigo do vinculo : $codigo');
+
     final response = await http.post(
       url,
       headers: {

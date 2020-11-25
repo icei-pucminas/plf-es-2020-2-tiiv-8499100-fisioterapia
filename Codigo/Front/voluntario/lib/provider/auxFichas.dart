@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class TestePendente {
   String nome;
+  String nomeLayout;
   int idExame;
   int idTeste;
   String valor1 = '';
@@ -25,6 +26,40 @@ class TestePendente {
     this.nome,
     this.pendente = true,
   });
+
+  bool verificarTeste() {
+    if (resultadoDireito != null)
+      return false;
+    else
+      return true;
+  }
+
+  void inserirNomeLayout() {
+    switch (nome) {
+      case 'Calc Star':
+        nomeLayout = 'STD e STE Test';
+        break;
+      case 'Calc RQ':
+        nomeLayout = 'RQ Test';
+        break;
+      case 'Calc Y':
+        nomeLayout = 'Y Test';
+        break;
+      case 'Hop Teste':
+        nomeLayout = 'HT Test';
+        break;
+      case 'Closed Kinect':
+        nomeLayout = 'CK Test';
+        break;
+      case 'Dirso Flexão':
+        nomeLayout = 'Dorsiflexão';
+        break;
+      case 'Single Leg':
+        nomeLayout = 'Single Leg Test';
+        break;
+      default:
+    }
+  }
 }
 
 class FichaAux {
@@ -32,6 +67,7 @@ class FichaAux {
   String nomeAtleta;
   String nomeFisioterapeuta;
   List<TestePendente> testes = [];
+
   FichaAux({
     this.idExame,
     this.nomeAtleta,
@@ -53,6 +89,7 @@ class FichasAux with ChangeNotifier {
         await http.get('http://fisioterapiaapp1.azurewebsites.net/Exames/$id');
     listaPedido.clear();
     List<dynamic> data = json.decode(response.body);
+
     if (data != null) {
       data.forEach((exame) {
         listaPedido.add(
@@ -67,9 +104,14 @@ class FichasAux with ChangeNotifier {
               );
             }).toList(),
             nomeAtleta: exame['nomeAtleta'],
-            nomeFisioterapeuta: exame['nomeFisioteraputa'],
+            nomeFisioterapeuta: exame['nomeFisioterapeuta'],
           ),
         );
+      });
+      listaPedido.forEach((pedidoFicha) {
+        pedidoFicha.testes.forEach((teste) {
+          teste.inserirNomeLayout();
+        });
       });
       notifyListeners();
     }

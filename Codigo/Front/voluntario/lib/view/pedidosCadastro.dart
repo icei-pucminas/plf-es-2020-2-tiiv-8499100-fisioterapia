@@ -115,6 +115,10 @@ class _PedidoCadastroState extends State<PedidoCadastro> {
                                       Container(
                                         alignment: Alignment.center,
                                         child: FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
                                           onPressed: () => Navigator.of(context)
                                               .pushNamed(
                                                   AppRoutes.AUTH_VOLUNTARY),

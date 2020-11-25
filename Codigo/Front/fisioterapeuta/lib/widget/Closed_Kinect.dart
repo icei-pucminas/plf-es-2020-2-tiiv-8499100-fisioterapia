@@ -11,7 +11,7 @@ class ClosedKinect extends StatelessWidget {
         backgroundColor: Colors.teal[600],
         centerTitle: true,
         title: Text(
-          teste.nomeTeste,
+          teste.nomeLayout,
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -52,16 +52,16 @@ class ClosedKinect extends StatelessWidget {
                     children: <Widget>[
                       ListTile(
                         title: Text(
-                          'Membro direito',
+                          'Quantidade de toques',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.teal[700],
                           ),
                         ),
                         subtitle: Text(teste.resultado1),
                       ),
-                      ListTile(
+                      /*ListTile(
                         title: Text(
                           'Membro esquerdo',
                           style: TextStyle(
@@ -71,7 +71,7 @@ class ClosedKinect extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(teste.resultado2),
-                      ),
+                      ),*/
                     ],
                   ),
                 ),
@@ -79,6 +79,9 @@ class ClosedKinect extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   color: Colors.teal[700],
                   onPressed: () {
                     Navigator.of(context).pop();

@@ -13,10 +13,10 @@ class ClosedKinect extends StatefulWidget {
 }
 
 class _ClosedKinect extends State<ClosedKinect> {
-  String infoText = "Quantidade de toques realziados MD ";
-  String infoText1 = "Quantidade de toques realziados ME";
+  String infoText = "Quantidade de toques ";
+  //String infoText1 = "Quantidade de toques ";
   TextEditingController membroDireito = TextEditingController();
-  TextEditingController membroEsquerdo = TextEditingController();
+  //TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
   TestePendente teste;
 
@@ -35,16 +35,16 @@ class _ClosedKinect extends State<ClosedKinect> {
   void _concatenarCampos() {
     FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
     setState(() {
-      infoText = "Quantidade de toques realziados MD ${membroDireito.text}";
-      infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
+      infoText = "Quantidade de toques  ${membroDireito.text}";
+      //  infoText1 = "Quantidade de toques  ${membroEsquerdo.text}";
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
         widget.idTeste,
         membroDireito.text,
-        membroEsquerdo.text,
+        'Não preenchido',
         infoText,
-        infoText1,
+        'Não preenchido',
       );
       verificarTeste = false;
     });
@@ -53,9 +53,9 @@ class _ClosedKinect extends State<ClosedKinect> {
   void _resetField() {
     setState(() {
       membroDireito.text = "";
-      membroEsquerdo.text = "";
-      infoText = "Quantidade de toques realizados MD";
-      infoText1 = "Quantidade de toques realizados ME";
+      //membroEsquerdo.text = "";
+      infoText = "Quantidade de toques";
+      //infoText1 = "Quantidade de toques realizados ME";
     });
   }
 
@@ -64,7 +64,7 @@ class _ClosedKinect extends State<ClosedKinect> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text(" Closed Kinect Test"),
+        title: Text(" CK Test"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -79,7 +79,7 @@ class _ClosedKinect extends State<ClosedKinect> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            buildTextfield("Membro Direito:", membroDireito),
+            buildTextfield("Quantidade de toques:", membroDireito),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
@@ -89,7 +89,7 @@ class _ClosedKinect extends State<ClosedKinect> {
                 textAlign: TextAlign.center,
               ),
             ),
-            buildTextfield("Membro Esquerdo:", membroEsquerdo),
+            /*    buildTextfield("Membro Esquerdo:", membroEsquerdo),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: Text(
@@ -97,7 +97,7 @@ class _ClosedKinect extends State<ClosedKinect> {
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 textAlign: TextAlign.center,
               ),
-            ),
+            ),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -135,12 +135,17 @@ class _ClosedKinect extends State<ClosedKinect> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
                 ),
+
+                /*
                 SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -159,7 +164,7 @@ class _ClosedKinect extends State<ClosedKinect> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

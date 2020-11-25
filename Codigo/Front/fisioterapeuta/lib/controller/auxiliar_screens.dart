@@ -1,4 +1,3 @@
-import 'package:FisioApp/controller/auxiliares_form.dart';
 import 'package:FisioApp/providers/auxiliares.dart';
 import 'package:FisioApp/widget/auxiliares_list.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,7 @@ class _AuxiliarScreenState extends State<AuxiliarScreen> {
           },
         ),
         backgroundColor: Colors.teal[600],
-        titleSpacing: 60,
+        centerTitle: true,
         title: Text(
           'Auxiliares',
           style: TextStyle(

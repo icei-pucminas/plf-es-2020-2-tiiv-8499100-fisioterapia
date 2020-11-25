@@ -8,8 +8,6 @@ class Auxiliares with ChangeNotifier {
   Auxiliar selecionado;
   String chaveSelecionada;
 
-  final String baseUrl = 'https://flutter-testereq.firebaseio.com/auxiliares';
-
   List<Auxiliar> listaAux = [];
   String _token;
   String _userId;
@@ -38,6 +36,7 @@ class Auxiliares with ChangeNotifier {
     return Future.value();
   }
 
+/*
   Future<void> addAuxiliar(String nomeInserido, String emailInserido) async {
     final response = await http.post(
       '$baseUrl/$_userId.json?auth=$_token',
@@ -56,7 +55,7 @@ class Auxiliares with ChangeNotifier {
     );
     notifyListeners();
   }
-
+*/
   void atualizarSelecionado() {
     selecionado =
         listaAux.singleWhere((element) => element.idServer == chaveSelecionada);

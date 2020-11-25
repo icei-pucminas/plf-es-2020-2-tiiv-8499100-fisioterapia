@@ -124,6 +124,9 @@ class _ResultState extends State<Result> {
                 height: 20,
               ),
               RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 color: Colors.teal[600],
                 child: Text(
                   'Voltar',

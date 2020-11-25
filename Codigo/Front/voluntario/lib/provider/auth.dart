@@ -57,12 +57,11 @@ class Auth with ChangeNotifier {
     } else {
       notifyListeners();
     }
-    print('deu2');
+
     return Future.value();
   }
 
   Future<void> login(String email, String senha) async {
-    print('entrou no auth');
     final url = 'https://fisioterapiaapp1.azurewebsites.net/Usuario/login';
     var response = await http.post(
       url,
@@ -80,9 +79,9 @@ class Auth with ChangeNotifier {
     if (responseBody['message'] != null) {
       throw ExcecaoAcesso(responseBody['error']['message']);
     } else {
-      print(' fora  $responseBody'); // imprime oque esta no response
+      /*print(' fora  $responseBody'); // imprime oque esta no response
       print('token fora : ${responseBody['jwtToken']}');
-      print('id fora : ${responseBody['id']}');
+      print('id fora : ${responseBody['id']}');*/
       _userId = responseBody['id'].toString();
       _token = responseBody['jwtToken'];
 
@@ -93,10 +92,9 @@ class Auth with ChangeNotifier {
   }
 
   logout(context) {
-    print('dentro');
     _token = null;
     _userId = null;
-    print('token valor :  $token');
+
     Navigator.of(context).popAndPushNamed(AppRoutes.AUTHOUFICHAS);
   }
 }

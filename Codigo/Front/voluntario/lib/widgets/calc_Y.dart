@@ -261,14 +261,17 @@ class _CalcYState extends State<CalcY> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
                 ),
                 //botão de voltar
-                SizedBox(width: 20),
+                /*SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
@@ -286,7 +289,7 @@ class _CalcYState extends State<CalcY> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

@@ -13,10 +13,10 @@ class HopTest extends StatefulWidget {
 }
 
 class _HopTest extends State<HopTest> {
-  String infoText = "Membro Direito";
-  String infoText1 = "Membro Esquerdo";
+  String infoText = "Distância em metros";
+  //String infoText1 = "Membro Esquerdo";
   TextEditingController membroDireito = TextEditingController();
-  TextEditingController membroEsquerdo = TextEditingController();
+  // TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
   TestePendente teste;
 
@@ -35,16 +35,16 @@ class _HopTest extends State<HopTest> {
   void _concatenarCampos() {
     FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
     setState(() {
-      infoText = "Quantidade de toques realziados MD ${membroDireito.text}";
-      infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
+      infoText = "Distância em metros ${membroDireito.text}";
+      // infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
         widget.idTeste,
         membroDireito.text,
-        membroEsquerdo.text,
+        'Não preenchido',
         infoText,
-        infoText1,
+        'Não preenchido',
       );
       verificarTeste = false;
     });
@@ -53,9 +53,9 @@ class _HopTest extends State<HopTest> {
   void _resetField() {
     setState(() {
       membroDireito.text = "";
-      membroEsquerdo.text = "";
-      infoText = "Distância do membro Direito";
-      infoText1 = "Distância do membro Esquerdo";
+      //membroEsquerdo.text = "";
+      infoText = "Ditância em metros";
+      // infoText1 = "Distância do membro Esquerdo";
     });
   }
 
@@ -64,7 +64,7 @@ class _HopTest extends State<HopTest> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text("Hop Test"),
+        title: Text("HT Teste"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -79,7 +79,7 @@ class _HopTest extends State<HopTest> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            buildTextfield("Membro Direito:", membroDireito),
+            buildTextfield("Distância em metros:", membroDireito),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
@@ -89,7 +89,7 @@ class _HopTest extends State<HopTest> {
                 textAlign: TextAlign.center,
               ),
             ),
-            buildTextfield("Membro Esquerdo:", membroEsquerdo),
+            /*buildTextfield("Membro Esquerdo:", membroEsquerdo),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: Text(
@@ -97,7 +97,7 @@ class _HopTest extends State<HopTest> {
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 textAlign: TextAlign.center,
               ),
-            ),
+            ),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -135,13 +135,16 @@ class _HopTest extends State<HopTest> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
                 ),
-                SizedBox(width: 20),
+                /*SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
@@ -159,7 +162,7 @@ class _HopTest extends State<HopTest> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

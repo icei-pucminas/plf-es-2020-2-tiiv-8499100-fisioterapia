@@ -75,7 +75,7 @@ class _FichasViewState extends State<FichasView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          FlatButton(
+                          /* FlatButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -85,7 +85,7 @@ class _FichasViewState extends State<FichasView> {
                             ),
                             color: Colors.teal[700],
                             onPressed: () {},
-                          ),
+                          ),*/
                           FlatButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

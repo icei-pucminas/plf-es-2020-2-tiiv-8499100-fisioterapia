@@ -21,6 +21,7 @@ class _FormTesteState extends State<FormTeste> {
         itemCount: testes.listaTesteBD.length,
         itemBuilder: (ctx, index) {
           var listTeste = testes.listaTesteBD[index];
+          listTeste.inserirNomeLayout();
           return Column(
             children: <Widget>[
               Container(
@@ -32,7 +33,7 @@ class _FormTesteState extends State<FormTeste> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: CheckboxListTile(
-                  title: Text('${listTeste.nomeTeste}'),
+                  title: Text('${listTeste.nomeLayout}'),
                   value: listTeste.status,
                   onChanged: (bool value) {
                     setState(

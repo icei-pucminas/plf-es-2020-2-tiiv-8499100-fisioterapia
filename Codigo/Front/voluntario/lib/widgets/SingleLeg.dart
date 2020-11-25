@@ -13,10 +13,10 @@ class SingleLeg extends StatefulWidget {
 }
 
 class _SingleLeg extends State<SingleLeg> {
-  String infoText = "Quantidade de Repetições realziados MD ";
-  String infoText1 = "Quantidade de Repetiçoes realziados ME";
+  String infoText = "Força e resistência muscular";
+  //String infoText1 = "Quantidade de Repetiçoes realizados ME";
   TextEditingController membroDireito = TextEditingController();
-  TextEditingController membroEsquerdo = TextEditingController();
+  //TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
   TestePendente teste;
 
@@ -35,16 +35,16 @@ class _SingleLeg extends State<SingleLeg> {
   void _concatenarCampos() {
     FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
     setState(() {
-      infoText = "Quantidade de toques realziados MD ${membroDireito.text}";
-      infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
+      infoText = "Força e resistência muscular ${membroDireito.text}";
+      //  infoText1 = "Quantidade de toques realziados ME ${membroEsquerdo.text}";
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
         widget.idTeste,
         membroDireito.text,
-        membroEsquerdo.text,
+        'Não preenchido',
         infoText,
-        infoText1,
+        'Não preenchido',
       );
       verificarTeste = false;
     });
@@ -53,9 +53,9 @@ class _SingleLeg extends State<SingleLeg> {
   void _resetField() {
     setState(() {
       membroDireito.text = "";
-      membroEsquerdo.text = "";
-      infoText = "Quantidade de Repetições realizados MD";
-      infoText1 = "Quantidade de Repetições realizados ME";
+      //membroEsquerdo.text = "";
+      infoText = "Força e resistência muscular";
+      //infoText1 = "Quantidade de Repetições realizados ME";
     });
   }
 
@@ -64,7 +64,7 @@ class _SingleLeg extends State<SingleLeg> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text(" Single Leg Test "),
+        title: Text(" SLBD E SLBE Test "),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -79,7 +79,7 @@ class _SingleLeg extends State<SingleLeg> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            buildTextfield("Membro Direito:", membroDireito),
+            buildTextfield("Força e resistência muscular:", membroDireito),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
@@ -89,7 +89,7 @@ class _SingleLeg extends State<SingleLeg> {
                 textAlign: TextAlign.center,
               ),
             ),
-            buildTextfield("Membro Esquerdo:", membroEsquerdo),
+            /*    buildTextfield("Membro Esquerdo:", membroEsquerdo),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: Text(
@@ -97,7 +97,7 @@ class _SingleLeg extends State<SingleLeg> {
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 textAlign: TextAlign.center,
               ),
-            ),
+            ),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -135,12 +135,15 @@ class _SingleLeg extends State<SingleLeg> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
-                ),
+                ), /*
                 SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -159,7 +162,7 @@ class _SingleLeg extends State<SingleLeg> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

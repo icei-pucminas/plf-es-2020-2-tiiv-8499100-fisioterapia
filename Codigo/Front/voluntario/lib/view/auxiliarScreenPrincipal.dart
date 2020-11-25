@@ -54,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
         break;
       case 'Calc RQ':
-        print('entrou aquii tambemm');
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -310,18 +309,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
-                                              child: FlatButton(
-                                                textColor: Colors.teal[600],
-                                                onPressed: () {
-                                                  setState(() {
-                                                    realizarTeste(
-                                                        teste.nome,
-                                                        teste.idExame,
-                                                        teste.idTeste);
-                                                  });
-                                                },
-                                                child: Text(teste.nome),
-                                              ),
+                                              child: teste.verificarTeste()
+                                                  ? FlatButton(
+                                                      textColor:
+                                                          Colors.teal[600],
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          realizarTeste(
+                                                              teste.nome,
+                                                              teste.idExame,
+                                                              teste.idTeste);
+                                                        });
+                                                      },
+                                                      child: Text(
+                                                          teste.nomeLayout),
+                                                    )
+                                                  : Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                        vertical: 10.0,
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            ' ${teste.nomeLayout} ',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .teal[700],
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ' (Realizado) ',
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 12,
+                                                              color: Colors
+                                                                  .teal[700],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                             );
                                           },
                                         ),

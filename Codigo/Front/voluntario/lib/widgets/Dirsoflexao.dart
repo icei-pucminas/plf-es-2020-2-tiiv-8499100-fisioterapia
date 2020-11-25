@@ -13,10 +13,10 @@ class Dirsoflexao extends StatefulWidget {
 }
 
 class _Dirsoflexao extends State<Dirsoflexao> {
-  String infoText = "Valor Referência Membro Direito ";
-  String infoText1 = "Valor Referência Membro Esquerdo";
+  String infoText = "Força de pontência muscular";
+  //String infoText1 = "Valor Referência Membro Esquerdo";
   TextEditingController membroDireito = TextEditingController();
-  TextEditingController membroEsquerdo = TextEditingController();
+  //TextEditingController membroEsquerdo = TextEditingController();
   var verificarTeste = true;
   TestePendente teste;
 
@@ -35,15 +35,15 @@ class _Dirsoflexao extends State<Dirsoflexao> {
   void _resetField() {
     setState(() {
       membroDireito.text = "";
-      membroEsquerdo.text = "";
-      infoText = "Valor de Referencia Membro Direito";
-      infoText1 = "Valor de Referencia Membro Esquerdo";
+      //  membroEsquerdo.text = "";
+      infoText = "Força de pontência muscular";
+      //  infoText1 = "Valor de Referencia Membro Esquerdo";
     });
   }
 
   void _calculate() {
     int mDireito = int.parse(membroDireito.text);
-    int mEsquerdo = int.parse(membroEsquerdo.text);
+    //int mEsquerdo = int.parse(membroEsquerdo.text);
     FichasAux fichasAux = Provider.of<FichasAux>(context, listen: false);
 
     setState(() {
@@ -51,18 +51,18 @@ class _Dirsoflexao extends State<Dirsoflexao> {
         infoText = "Valor entre 33.6° - 44°";
       } else
         infoText = "Valor fora de 33.6° - 44°";
-      if (mEsquerdo >= 33.6 && mEsquerdo <= 44) {
+      /*if (mEsquerdo >= 33.6 && mEsquerdo <= 44) {
         infoText1 = "Valor entre 33.6° - 44°";
       } else
-        infoText1 = "Valor fora de 33.6° - 44°";
+        infoText1 = "Valor fora de 33.6° - 44°";*/
 
       teste = fichasAux.inserirRespostaTesteDoisValores(
         widget.idExame,
         widget.idTeste,
         membroDireito.text,
-        membroEsquerdo.text,
+        'Não preenchido',
         infoText,
-        infoText1,
+        'Não preenchido',
       );
       verificarTeste = false;
     });
@@ -73,7 +73,7 @@ class _Dirsoflexao extends State<Dirsoflexao> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[600],
-        title: Text(" Dirsoflexão Test"),
+        title: Text(" Dorsiflexão Test"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -88,7 +88,7 @@ class _Dirsoflexao extends State<Dirsoflexao> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            buildTextfield("Membro Direito:", membroDireito),
+            buildTextfield("Força de pontência muscular:", membroDireito),
             Divider(),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
@@ -98,7 +98,7 @@ class _Dirsoflexao extends State<Dirsoflexao> {
                 textAlign: TextAlign.center,
               ),
             ),
-            buildTextfield("Membro Esquerdo:", membroEsquerdo),
+            /*buildTextfield("Membro Esquerdo:", membroEsquerdo),
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: Text(
@@ -106,7 +106,7 @@ class _Dirsoflexao extends State<Dirsoflexao> {
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 textAlign: TextAlign.center,
               ),
-            ),
+            ),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -144,13 +144,16 @@ class _Dirsoflexao extends State<Dirsoflexao> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
                 ),
-                SizedBox(width: 20),
+/*                SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
@@ -168,7 +171,7 @@ class _Dirsoflexao extends State<Dirsoflexao> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

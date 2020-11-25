@@ -13,7 +13,9 @@ class Fichas with ChangeNotifier {
   String _userId;
   Fichas(this._token, this._userId, this.listaFichas);
   List<Ficha> fichasCarregadas = [];
+
   Future<void> loadFichas() async {
+    String nomeDoTeste;
     final response = await http.post(
         'http://fisioterapiaapp1.azurewebsites.net/Exames/ListaFisioExame',
         headers: {
@@ -33,7 +35,12 @@ class Fichas with ChangeNotifier {
             idServerFicha: exame['idExame'].toString(),
             testes: (exame['idsExamesExercicios'] as List<dynamic>)
                 .map((testeItem) {
-              if (testeItem['nome'].toString().contains('Calc RQ')) {
+              nomeDoTeste = testeItem['nome'].toString();
+              //if (testeItem['nome'].toString().contains('Calc RQ')) {
+              if (nomeDoTeste.contains('Calc RQ') ||
+                  nomeDoTeste.contains('Hop Teste') ||
+                  nomeDoTeste.contains('Closed Kinect') ||
+                  nomeDoTeste.contains('Dirso Flexão')) {
                 return Teste(
                   id: testeItem['idExame'],
                   valor1: testeItem['valor1'],
@@ -64,6 +71,12 @@ class Fichas with ChangeNotifier {
         );
       });
 
+      fichasCarregadas.forEach((ficha) {
+        ficha.testes.forEach((teste) {
+          teste.inserirNomeLayout();
+        });
+      });
+
       notifyListeners();
     }
 
@@ -91,7 +104,7 @@ class Fichas with ChangeNotifier {
       }),
     );
     var responseBody = json.decode(response.body);
-
+    print('deu merda ? $responseBody');
     listaFichas.add(novaFicha);
     notifyListeners();
   }

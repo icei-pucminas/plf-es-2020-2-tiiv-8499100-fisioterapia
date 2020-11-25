@@ -57,11 +57,14 @@ class ModelsVoluntarys with ChangeNotifier {
       pedidosCarregados.clear();
       data.forEach((pedido) {
         pedidosCarregados.add(PedidoCadastroCard(
-          nomeAtl: pedido['nomeAlteta'],
+          nomeAtl: pedido['nomeAtleta'],
           nomeFisio: pedido['fisioterapeuta'],
         ));
       });
     }
+    pedidosCarregados.forEach((element) {
+      print('nome do atleta : ${element.nomeAtl}');
+    });
     return Future.value();
   }
 

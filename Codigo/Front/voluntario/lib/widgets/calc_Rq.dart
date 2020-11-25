@@ -145,12 +145,15 @@ class _CalcRQState extends State<CalcRQ> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
-                ),
+                ), /*
                 SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -166,10 +169,11 @@ class _CalcRQState extends State<CalcRQ> {
                         style: TextStyle(color: Colors.white, fontSize: 20.0),
                       ),
                       onPressed: () => Navigator.of(context)
-                          .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
+                          .pop(), /*
+                          .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),*/
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

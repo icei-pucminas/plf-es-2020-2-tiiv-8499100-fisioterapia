@@ -9,18 +9,18 @@ class FichasList extends StatelessWidget {
   //final List<Ficha> lista;
   //FichasList(this.lista);
 
-  void mostrarFicha(List<Ficha> lista) {
+  /*void mostrarFicha(List<Ficha> lista) {
     lista.forEach((element) {
       print(
           ' auxiliar : ${element.nomeAuxiliar}  atleta : ${element.nomeAtleta}  ');
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     Fichas fichasClass = Provider.of<Fichas>(context);
     List<Ficha> lista = fichasClass.fichasCarregadas;
-    mostrarFicha(lista);
+    //mostrarFicha(lista);
 
     return Container(
       height: 500,

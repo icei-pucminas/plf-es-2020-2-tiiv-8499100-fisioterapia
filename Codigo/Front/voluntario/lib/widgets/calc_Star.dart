@@ -256,14 +256,17 @@ class _CalcStarState extends State<CalcStar> {
                             onPressed: () {
                               setState(() {
                                 Provider.of<FichasAux>(context, listen: false)
-                                    .enviarExerciciosRespondidos(teste);
+                                    .enviarExerciciosRespondidos(teste)
+                                    .then((_) {
+                                  Navigator.of(context).pop();
+                                });
                               });
                             },
                           ),
                   ),
                 ),
                 //botão de voltar
-                SizedBox(width: 20),
+                /*SizedBox(width: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
@@ -281,7 +284,7 @@ class _CalcStarState extends State<CalcStar> {
                           .popAndPushNamed(AppRoutes.AUX_HOME_SCREEN),
                     ),
                   ),
-                ),
+                ),*/
               ],
             ),
           ],

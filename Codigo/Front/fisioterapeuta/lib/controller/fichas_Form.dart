@@ -47,44 +47,79 @@ class _FichasFormState extends State<FichasForm> {
         backgroundColor: Colors.teal[600],
         centerTitle: true,
       ),
-      body: Stepper(
-        type: StepperType.horizontal,
-        steps: _mySteps(),
-        currentStep: this._currentStep,
-        onStepTapped: (step) {
-          setState(() {
-            this._currentStep = step;
-          });
-        },
-        onStepContinue: () {
-          setState(() {
-            if (this._currentStep < this._mySteps().length - 1) {
-              this._currentStep = this._currentStep + 1;
-            } else {
-              //Logic to check if everything is completed
-              Auxiliar selecionado = auxiliares.selecionado;
-              List<Atleta> atletasSelecionados =
-                  atletas.retornaAtletasSelecionados();
-              List<Teste> testesSelecionados = testes.retornarSelecionados();
-              fichas.addFichas(
-                selecionado,
-                atletasSelecionados,
-                testesSelecionados,
-              );
-              Navigator.of(context).pop();
-            }
-          });
-        },
-        onStepCancel: () {
-          setState(() {
-            if (this._currentStep > 0) {
-              this._currentStep = this._currentStep - 1;
-            } else {
-              this._currentStep = 0;
-              Navigator.of(context).pop();
-            }
-          });
-        },
+      body: Theme(
+        data: ThemeData(
+          accentColor: Colors.teal[600],
+          primaryColor: Colors.teal[600],
+          colorScheme: ColorScheme.light(
+            primary: Colors.teal[600],
+          ),
+        ),
+        child: Stepper(
+          type: StepperType.horizontal,
+          steps: _mySteps(),
+          currentStep: this._currentStep,
+          onStepTapped: (step) {
+            setState(() {
+              this._currentStep = step;
+            });
+          },
+          onStepContinue: () {
+            setState(() {
+              if (this._currentStep < this._mySteps().length - 1) {
+                this._currentStep = this._currentStep + 1;
+              } else {
+                //Logic to check if everything is completed
+                Auxiliar selecionado = auxiliares.selecionado;
+                List<Atleta> atletasSelecionados =
+                    atletas.retornaAtletasSelecionados();
+                List<Teste> testesSelecionados = testes.retornarSelecionados();
+                fichas.addFichas(
+                  selecionado,
+                  atletasSelecionados,
+                  testesSelecionados,
+                );
+                Navigator.of(context).pop();
+              }
+            });
+          },
+          onStepCancel: () {
+            setState(() {
+              if (this._currentStep > 0) {
+                this._currentStep = this._currentStep - 1;
+              } else {
+                this._currentStep = 0;
+                Navigator.of(context).pop();
+              }
+            });
+          },
+          controlsBuilder: (BuildContext context,
+              {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(height: 10),
+                FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: onStepContinue,
+                  textColor: Colors.white,
+                  child: Text('Continue'),
+                  color: Colors.teal[700],
+                ),
+                FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onPressed: onStepCancel,
+                    textColor: Colors.white,
+                    child: Text('Voltar'),
+                    color: Colors.teal[700]),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -92,6 +127,7 @@ class _FichasFormState extends State<FichasForm> {
   List<Step> _mySteps() {
     List<Step> _steps = [
       Step(
+        //content:
         title: Text('Auxiliar'),
         content: FormAuxiliar(),
         isActive: _currentStep >= 0,

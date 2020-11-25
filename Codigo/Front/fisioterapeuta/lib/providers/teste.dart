@@ -1,6 +1,7 @@
 class Teste {
   int id;
   String nomeTeste;
+  String nomeLayout;
   String valor1 = '';
   String valor2 = '';
   String valor3 = '';
@@ -40,5 +41,32 @@ class Teste {
       return true;
     else
       return false;
+  }
+
+  void inserirNomeLayout() {
+    switch (nomeTeste) {
+      case 'Calc Star':
+        nomeLayout = 'STD e STE Test';
+        break;
+      case 'Calc RQ':
+        nomeLayout = 'RQ Test';
+        break;
+      case 'Calc Y':
+        nomeLayout = 'Y Test';
+        break;
+      case 'Hop Teste':
+        nomeLayout = 'HT Test';
+        break;
+      case 'Closed Kinect':
+        nomeLayout = 'CK Test';
+        break;
+      case 'Dirso Flexão':
+        nomeLayout = 'Dorsiflexão';
+        break;
+      case 'Single Leg':
+        nomeLayout = 'Single Leg Test';
+        break;
+      default:
+    }
   }
 }

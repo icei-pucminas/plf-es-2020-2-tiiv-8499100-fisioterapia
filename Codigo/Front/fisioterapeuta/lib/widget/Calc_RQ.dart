@@ -11,7 +11,7 @@ class CalcRQ extends StatelessWidget {
         backgroundColor: Colors.teal[600],
         centerTitle: true,
         title: Text(
-          teste.nomeTeste,
+          teste.nomeLayout,
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -81,6 +81,9 @@ class CalcRQ extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   color: Colors.teal[700],
                   onPressed: () {
                     Navigator.of(context).pop();
