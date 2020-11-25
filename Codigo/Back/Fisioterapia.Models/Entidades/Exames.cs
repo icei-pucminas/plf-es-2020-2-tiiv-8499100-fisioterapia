@@ -19,5 +19,7 @@ namespace Fisioterapia.Models.Entidades {
 
         public ICollection<ExameExercicios> ExameExercicios { get; set; }
 
+        public int QuantiFichas { get; set; }
+
     }
 }

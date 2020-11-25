@@ -30,20 +30,16 @@ namespace Fisioterapia.App.Controllers
             return _exameServices.GetAll();
         }
 
-        [HttpGet("{id}")]
-        public ExameResponse GetById(int id)
-        {
-            return _exameServices.GetById(id);
-        }
+        //[HttpGet("{id}")]
+        //public ExameResponse GetById(int id)
+        //{
+        //    return _exameServices.GetById(id);
+        //}
 
         [HttpPost("registerExame")]
         public IActionResult Register([FromBody] CriarExameModel model)
         {
-            if (model == null)
-            {
-                return BadRequest(new { message = "É necessário fornecer dados do exame!" });
-            }
-
+          
             try
             {
                 _exameServices.Criar(model);
@@ -77,11 +73,37 @@ namespace Fisioterapia.App.Controllers
             return Ok(new { message = "Exame excluido  com  sucesso!" });
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetAllExercicios(int id)
+        [HttpGet("ExerciciosAll")]
+        public IActionResult GetAllExercicios()
         {
-            var response = _exameServices.GetAllExercicios(id);
+            var response = _exameServices.GetAllExercicios();
             return Ok(response);
+        }
+
+        [HttpGet("{Id}")]
+        public IEnumerable<ListaExamesAuxiliar> GetAuxliarExercicios(int Id) 
+        {
+            var response = _exameServices.GetAuxiliarExame(Id);
+            return response;
+        }
+        [HttpPost("notificar")]
+        public IActionResult Notificar([FromBody]NotificarModel model) 
+        {
+            int Id = model.IdExame;
+           var reponse = _exameServices.Notificacao(Id);
+            if (reponse == 1) 
+            {
+                return Ok(new { Messagem = "Não foi  finalizado os teste!" });
+            } else if(reponse == 2){
+                return Ok(new { Messagem = "Teste Finalizados" });
+            }
+            return Ok(new { Messagem = "Não foi  finalizado os teste!" });
+        }
+        
+        [HttpPost("ListaFisioExame")]
+        public IEnumerable<ListaExamesFisio> GetFisiote([FromBody]ListaexameFisioResponse model) {
+            var response = _exameServices.GetFisioExame(model.Id);
+            return response;
         }
     }
 }

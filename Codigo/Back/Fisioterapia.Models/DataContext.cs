@@ -12,6 +12,8 @@ namespace Fisioterapia.Models {
         public DbSet<Atleta> Atletas { get; set; }
         public DbSet<Auxiliar> Auxiliars { get; set; }
         public DbSet<Exames> Exames { get; set; }
+
+        public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Exercicios> Exercicios { get; set; }
         public DbSet<Logs> Logs { get; set; }
         public DbSet<ExameExercicios> ExameExercicios { get; set; }

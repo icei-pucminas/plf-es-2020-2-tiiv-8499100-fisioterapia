@@ -12,5 +12,16 @@ namespace Fisioterapia.Models.Entidades {
         [ForeignKey("IdExercios")]
 
         public virtual Exercicios Exercicios { get; set; }
+        public string Valor1 { get; set; }
+        public string Valor2 { get; set; }
+        public string Valor3 { get; set; }
+        public string Valor4 { get; set; }
+        public string Valor5 { get; set; }
+        public string Valor6 { get; set; }
+        public string Valor7 { get; set; }
+        public string Valor8 { get; set; }
+
+        public string Resultado1 { get; set; }
+        public string Resultado2 { get; set; }
     }
 }

@@ -11,7 +11,9 @@ namespace Fisioterapia.App.Models.Usuarios {
         public string Role { get; set; }
         public DateTime Criado { get; set; }
         public DateTime? Atulizado { get; set; }
+
         public bool IsVerificado { get; set; }
+        public string Codvinculo { get; set; }
         public string jwtToken { get; set; }
         [JsonIgnore]
         public string RecarregarToken { get; set; }

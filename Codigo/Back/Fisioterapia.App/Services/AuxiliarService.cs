@@ -88,7 +88,7 @@ namespace Fisioterapia.App.Services {
 
         public void VincularAuxiliar(AuxiliarVincular model) {
             var vinculo = new AuxiliarUsuarios { 
-                IdAuxiliar = _context.Auxiliars.SingleOrDefault(a=>a.IdUsuario == model.Id).Id,
+                IdAuxiliar = model.Id,
                 IdUsuario = _context.Usuarios.SingleOrDefault(a=>a.Codvinculo.Contains(model.codVinculo)).Id
             };
             _context.AuxiliarUsuarios.Add(vinculo);

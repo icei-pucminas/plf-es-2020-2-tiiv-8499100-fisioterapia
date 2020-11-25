@@ -17,6 +17,6 @@ namespace Fisioterapia.Models.Entidades
         public float Altura { get; set; }
         public string Celular { get; set; }
         public string Profissao { get; set; }
-        public byte OcorreuContusao { get; set; }
+        public bool OcorreuContusao { get; set; }
     }
 }

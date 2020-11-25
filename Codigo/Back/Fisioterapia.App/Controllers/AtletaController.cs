@@ -23,7 +23,7 @@ namespace Fisioterapia.App.Controllers
             _mapper = mapper;
         }
         [HttpPost("cadastrarAtleta")]
-        public ActionResult<CadastrarAtletaModel>cadastrar(CadastrarAtletaModel model)
+        public ActionResult<CadastrarAtletaModel>cadastrar([FromBody]CadastrarAtletaModel model)
         {
             _atletaService.Cadastro(model,Request.Headers["origem"]);
 
@@ -37,15 +37,15 @@ namespace Fisioterapia.App.Controllers
             return Ok(new { message = "Atleta atualizado com sucesso!" });
         }
         [HttpGet("getallatleta")]
-        public IEnumerable<ResponseAtletaModel> GetAll() 
+        public IActionResult GetAll() 
         {
             var atleta = _atletaService.GetAll();
-            return atleta;
+            return Ok(atleta);
         }
-        [HttpGet("getAtleta")]
+        [HttpGet("{id}")]
         public ActionResult<ResponseAtletaModel> GetAll(int Id) {
             var atleta = _atletaService.GetById(Id);
-            return atleta;
+            return Ok(atleta);
         }
     }
 

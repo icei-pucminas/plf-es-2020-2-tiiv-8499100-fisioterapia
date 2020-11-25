@@ -38,9 +38,9 @@ namespace Fisioterapia.App.Services {
             var usuario = _mapper.Map<Usuarios>(model);
             usuario.Criado = DateTime.UtcNow;
             usuario.Verificado = DateTime.UtcNow;
+            usuario.VerificacaoToken = randomTokenString();
 
-
-            usuario.Codvinculo = "H589LC";
+            usuario.Codvinculo = alfanumericoAleatorio();
 
             //hash senha
             usuario.SenhaHash = BC.HashPassword(model.Senha);
@@ -67,17 +67,20 @@ namespace Fisioterapia.App.Services {
         }
 
 
-        public LoginResponse login(LoginModel model, string ipAcesso) {
+        public LoginResponse login([FromBody]LoginModel model, string ipAcesso) {
             var usuario = _context.Usuarios.SingleOrDefault(x => x.Email == model.Email);
-            if (usuario == null || BC.Verify(BC.HashPassword(model.Senha), usuario.SenhaHash))
+            if (usuario == null || BC.Verify(BC.HashPassword(model.Senha),usuario.SenhaHash) )
                 throw new AppException("Email ou Senha estar Incorreto!");
             //!usuario.IsVerificado
+           
             var JwtToken = generateJwtToken(usuario);
             var refreshToken = generateRefreshToken(ipAcesso);
             usuario.RecarregarToken.Add(refreshToken);
             _context.Update(usuario);
             _context.SaveChanges();
-
+            if (usuario.Role == Role.Auxi) {
+                usuario.Id = _context.Auxiliars.SingleOrDefault(a => a.IdUsuario == usuario.Id).Id;
+            }
             var reponse = _mapper.Map<LoginResponse>(usuario);
             reponse.jwtToken = JwtToken;
             reponse.RecarregarToken = refreshToken.Token;
@@ -108,9 +111,10 @@ namespace Fisioterapia.App.Services {
             }
             var usuario = _mapper.Map<Usuarios>(model);
             var isFirstUsuario = _context.Usuarios.Count() == 0;
-            usuario.Role = isFirstUsuario ? Role.Admin : Role.Auxi;
+            usuario.Role = isFirstUsuario ? Role.Admin : Role.User;
             usuario.Criado = DateTime.UtcNow;
             usuario.VerificacaoToken = randomTokenString();
+            usuario.Codvinculo = alfanumericoAleatorio();
             //hash Senha
             usuario.SenhaHash = BC.HashPassword(model.Senha);
             //salvar usuarios
@@ -241,11 +245,26 @@ namespace Fisioterapia.App.Services {
             var usuario = _context.AuxiliarUsuarios.Where(a => a.IdUsuario == id);
             List<Usuarios> UsuarioAuxiliar = new List<Usuarios>();
             foreach (var item in usuario) {
-                var auxiliar = _context.Usuarios.SingleOrDefault(u => u.Id == item.IdUsuario);
-                if (auxiliar != null)
+                var Idauxiliar = _context.Auxiliars.SingleOrDefault(a => a.Id == item.IdAuxiliar).IdUsuario;
+                if (Idauxiliar != 0) {
+                    var auxiliar = _context.Usuarios.SingleOrDefault(u => u.Id == Idauxiliar);
+                    if (auxiliar != null)
+                        auxiliar.Id = _context.Auxiliars.SingleOrDefault(a => a.Id == item.IdAuxiliar).Id;
                     UsuarioAuxiliar.Add(auxiliar);
+                }
             }
             return _mapper.Map<IList<LoginResponse>>(UsuarioAuxiliar);
+        }
+
+        public  string alfanumericoAleatorio() {
+            int tamanho = 6;
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(chars, tamanho)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+            return result;
         }
     }
 }

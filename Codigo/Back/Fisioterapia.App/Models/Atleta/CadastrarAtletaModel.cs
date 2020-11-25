@@ -19,7 +19,7 @@ namespace Fisioterapia.App.Models.Atleta
         [Required]
         public string LadoDominante { get; set; }
         [Required]
-        [Range(typeof(int),"0","??")]
+        
         public int Numero { get; set; }
         [Required]
         public string Posicao { get; set; }
@@ -31,6 +31,6 @@ namespace Fisioterapia.App.Models.Atleta
         public string Celular { get; set; }
         public string Profissao { get; set; }
         [Required]
-        public byte OcorreuContusao { get; set; }
+        public bool OcorreuContusao { get; set; }
     }
 }

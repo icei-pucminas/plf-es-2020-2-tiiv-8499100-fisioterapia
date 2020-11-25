@@ -39,8 +39,11 @@ namespace Fisioterapia.App {
 
             services.AddScoped<IUsuarioServices, UsuarioService>();
             services.AddScoped<IAuxiliarService, AuxiliarService>();
+            services.AddScoped<IAtletaService, AtletaService>();
             services.AddScoped<IEmailService, EmailService>();
-            
+            services.AddScoped<IPedidosServices, PedidoServices>();
+            services.AddScoped<IExerciciosServices, ExerciciosServices>();
+            services.AddScoped<IExameServices, ExameService>();
 
         }
 
